@@ -1,0 +1,869 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>hygorxaraujo</title>
+<link>https://hygorxaraujo.com/index.html</link>
+<atom:link href="https://hygorxaraujo.com/index.xml" rel="self" type="application/rss+xml"/>
+<description>My personal blog</description>
+<generator>quarto-1.2.258</generator>
+<lastBuildDate>Sun, 08 Mar 2020 03:00:00 GMT</lastBuildDate>
+<item>
+  <title>Explaining the Fogg behavior model</title>
+  <dc:creator>Hygor X. Araújo</dc:creator>
+  <link>https://hygorxaraujo.com/posts/2020-03-08-explaining-the-fogg-behavior-model.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>In this post, I would like to explain the Fogg Behavior Model, created by Brian Jeffrey Fogg (B. J. Fogg). <!-- TEASER_END --></p>
+<p>According to B. J. Fogg’s research, Behavior (<img src="https://latex.codecogs.com/png.latex?B">) happens at the intersection of three things: our Motivation (<img src="https://latex.codecogs.com/png.latex?M">), our Ability (<img src="https://latex.codecogs.com/png.latex?A">), and the Prompt (<img src="https://latex.codecogs.com/png.latex?P">) to the behavior.</p>
+<p><img src="https://latex.codecogs.com/png.latex?B%20=%20MAP"></p>
+<p>We can visualize the relationship between motivation, ability and the prompt in a two-dimensional graphic.</p>
+<p>I plotted the graphic below using Python and the NumPy and Matplotlib packages. I kept the code for anyone who is interested in how to do it.</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;">as</span> plt</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;">import</span> numpy <span class="im" style="color: #00769E;">as</span> np</span>
+<span id="cb1-3"></span>
+<span id="cb1-4">text <span class="op" style="color: #5E5E5E;">=</span> { <span class="co" style="color: #5E5E5E;"># text dict for easier translation</span></span>
+<span id="cb1-5">    <span class="st" style="color: #20794D;">'ability'</span>:<span class="st" style="color: #20794D;">'Ability'</span>,</span>
+<span id="cb1-6">    <span class="st" style="color: #20794D;">'motivation'</span>:<span class="st" style="color: #20794D;">'Motivation'</span>,</span>
+<span id="cb1-7">    <span class="st" style="color: #20794D;">'title'</span>:<span class="st" style="color: #20794D;">'Fogg Behavior Model'</span>,</span>
+<span id="cb1-8">    <span class="st" style="color: #20794D;">'bmap'</span>:<span class="st" style="color: #20794D;">'B = MAP'</span>,</span>
+<span id="cb1-9">    <span class="st" style="color: #20794D;">'bmap_sub'</span>:<span class="st" style="color: #20794D;">'At the same</span><span class="ch" style="color: #20794D;">\n</span><span class="st" style="color: #20794D;">moment'</span>,</span>
+<span id="cb1-10">    <span class="st" style="color: #20794D;">'ability_axis'</span>:(<span class="st" style="color: #20794D;">'Hard to Do'</span>, <span class="st" style="color: #20794D;">'Easy to Do'</span>),</span>
+<span id="cb1-11">    <span class="st" style="color: #20794D;">'motivation_axis'</span>:(<span class="st" style="color: #20794D;">'High'</span>, <span class="st" style="color: #20794D;">'Low'</span>),</span>
+<span id="cb1-12">    <span class="st" style="color: #20794D;">'action_line'</span>:<span class="st" style="color: #20794D;">'Action Line'</span>,</span>
+<span id="cb1-13">    <span class="st" style="color: #20794D;">'prompts'</span>:<span class="st" style="color: #20794D;">'Prompts'</span>,</span>
+<span id="cb1-14">    <span class="st" style="color: #20794D;">'prompts_succeed'</span>:<span class="st" style="color: #20794D;">'succeed here'</span>,</span>
+<span id="cb1-15">    <span class="st" style="color: #20794D;">'prompts_fail'</span>:<span class="st" style="color: #20794D;">'fail here'</span>,</span>
+<span id="cb1-16">}</span>
+<span id="cb1-17"></span>
+<span id="cb1-18">blue_color <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">'#06abe1'</span></span>
+<span id="cb1-19">green_color <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">'#81a050'</span></span>
+<span id="cb1-20">light_green_color <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">'#d2e5c9'</span></span>
+<span id="cb1-21">red_color <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">'#ff2222'</span></span>
+<span id="cb1-22">light_red_color <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">'#ffcbcb'</span></span>
+<span id="cb1-23"></span>
+<span id="cb1-24"><span class="co" style="color: #5E5E5E;"># Data for plotting</span></span>
+<span id="cb1-25">x <span class="op" style="color: #5E5E5E;">=</span> np.arange(<span class="fl" style="color: #AD0000;">0.0</span>, <span class="fl" style="color: #AD0000;">1.1</span>, <span class="fl" style="color: #AD0000;">0.01</span>)</span>
+<span id="cb1-26">y <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">1.05</span> <span class="op" style="color: #5E5E5E;">-</span> np.sqrt([np.<span class="bu" style="color: null;">max</span>((xi, <span class="dv" style="color: #AD0000;">0</span>)) <span class="cf" style="color: #003B4F;">for</span> xi <span class="kw" style="color: #003B4F;">in</span> <span class="dv" style="color: #AD0000;">1</span> <span class="op" style="color: #5E5E5E;">-</span> (x <span class="op" style="color: #5E5E5E;">-</span> <span class="fl" style="color: #AD0000;">1.05</span>) <span class="op" style="color: #5E5E5E;">**</span> <span class="dv" style="color: #AD0000;">2</span>])</span>
+<span id="cb1-27"></span>
+<span id="cb1-28">fig, ax <span class="op" style="color: #5E5E5E;">=</span> plt.subplots()</span>
+<span id="cb1-29">ax.plot(x, y, color<span class="op" style="color: #5E5E5E;">=</span>green_color)</span>
+<span id="cb1-30">ax.<span class="bu" style="color: null;">set</span>(xlabel<span class="op" style="color: #5E5E5E;">=</span>text[<span class="st" style="color: #20794D;">'ability'</span>],</span>
+<span id="cb1-31">       ylabel<span class="op" style="color: #5E5E5E;">=</span>text[<span class="st" style="color: #20794D;">'motivation'</span>],</span>
+<span id="cb1-32">       title<span class="op" style="color: #5E5E5E;">=</span>text[<span class="st" style="color: #20794D;">'title'</span>])</span>
+<span id="cb1-33">ax.tick_params(axis<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">'both'</span>, which<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">'both'</span>,length<span class="op" style="color: #5E5E5E;">=</span><span class="dv" style="color: #AD0000;">0</span>)</span>
+<span id="cb1-34">ax.fill_between(x, y, color<span class="op" style="color: #5E5E5E;">=</span>light_red_color)</span>
+<span id="cb1-35">ax.fill_between(x, y, <span class="bu" style="color: null;">max</span>(y), color<span class="op" style="color: #5E5E5E;">=</span>light_green_color)</span>
+<span id="cb1-36"></span>
+<span id="cb1-37">ax.text(<span class="fl" style="color: #AD0000;">0.65</span>, <span class="fl" style="color: #AD0000;">0.9</span>, text[<span class="st" style="color: #20794D;">'bmap'</span>], size<span class="op" style="color: #5E5E5E;">=</span><span class="dv" style="color: #AD0000;">25</span>, color<span class="op" style="color: #5E5E5E;">=</span>blue_color)</span>
+<span id="cb1-38">ax.text(<span class="fl" style="color: #AD0000;">0.82</span>, <span class="fl" style="color: #AD0000;">0.80</span>, text[<span class="st" style="color: #20794D;">'bmap_sub'</span>], size<span class="op" style="color: #5E5E5E;">=</span><span class="dv" style="color: #AD0000;">8</span>, color<span class="op" style="color: #5E5E5E;">=</span>blue_color)</span>
+<span id="cb1-39"></span>
+<span id="cb1-40">prompts_size<span class="op" style="color: #5E5E5E;">=</span><span class="dv" style="color: #AD0000;">15</span></span>
+<span id="cb1-41">ax.text(<span class="fl" style="color: #AD0000;">0.5</span>, <span class="fl" style="color: #AD0000;">0.5</span>, text[<span class="st" style="color: #20794D;">'prompts'</span>], size<span class="op" style="color: #5E5E5E;">=</span>prompts_size, color<span class="op" style="color: #5E5E5E;">=</span>blue_color)</span>
+<span id="cb1-42">ax.text(<span class="fl" style="color: #AD0000;">0.5</span>, <span class="fl" style="color: #AD0000;">0.45</span>, text[<span class="st" style="color: #20794D;">'prompts_succeed'</span>], size<span class="op" style="color: #5E5E5E;">=</span>prompts_size<span class="op" style="color: #5E5E5E;">*</span><span class="fl" style="color: #AD0000;">0.5</span>, color<span class="op" style="color: #5E5E5E;">=</span>green_color)</span>
+<span id="cb1-43">ax.text(<span class="fl" style="color: #AD0000;">0.08</span>, <span class="fl" style="color: #AD0000;">0.2</span>, text[<span class="st" style="color: #20794D;">'prompts'</span>], size<span class="op" style="color: #5E5E5E;">=</span>prompts_size, color<span class="op" style="color: #5E5E5E;">=</span>blue_color)</span>
+<span id="cb1-44">ax.text(<span class="fl" style="color: #AD0000;">0.08</span>, <span class="fl" style="color: #AD0000;">0.15</span>, text[<span class="st" style="color: #20794D;">'prompts_fail'</span>], size<span class="op" style="color: #5E5E5E;">=</span>prompts_size<span class="op" style="color: #5E5E5E;">*</span><span class="fl" style="color: #AD0000;">0.5</span>, color<span class="op" style="color: #5E5E5E;">=</span>red_color)</span>
+<span id="cb1-45"></span>
+<span id="cb1-46"><span class="co" style="color: #5E5E5E;"># set x axis ticks names</span></span>
+<span id="cb1-47">xticks <span class="op" style="color: #5E5E5E;">=</span> [<span class="st" style="color: #20794D;">''</span>] <span class="op" style="color: #5E5E5E;">*</span> <span class="bu" style="color: null;">len</span>(x)</span>
+<span id="cb1-48">xticks[<span class="dv" style="color: #AD0000;">10</span>], xticks[<span class="op" style="color: #5E5E5E;">-</span><span class="dv" style="color: #AD0000;">10</span>] <span class="op" style="color: #5E5E5E;">=</span> text[<span class="st" style="color: #20794D;">'ability_axis'</span>]</span>
+<span id="cb1-49">plt.xticks(x, xticks)</span>
+<span id="cb1-50"><span class="co" style="color: #5E5E5E;"># set y axis ticks names</span></span>
+<span id="cb1-51">yticks <span class="op" style="color: #5E5E5E;">=</span> [<span class="st" style="color: #20794D;">''</span>] <span class="op" style="color: #5E5E5E;">*</span> <span class="bu" style="color: null;">len</span>(y)</span>
+<span id="cb1-52">yticks[<span class="dv" style="color: #AD0000;">6</span>], yticks[<span class="op" style="color: #5E5E5E;">-</span><span class="dv" style="color: #AD0000;">1</span>] <span class="op" style="color: #5E5E5E;">=</span> text[<span class="st" style="color: #20794D;">'motivation_axis'</span>]</span>
+<span id="cb1-53">plt.yticks(y, yticks)</span>
+<span id="cb1-54"></span>
+<span id="cb1-55"><span class="co" style="color: #5E5E5E;"># set axis' limits</span></span>
+<span id="cb1-56">plt.xlim([<span class="fl" style="color: #AD0000;">0.0</span>, <span class="fl" style="color: #AD0000;">1.0</span>])</span>
+<span id="cb1-57">plt.ylim([<span class="fl" style="color: #AD0000;">0.0</span>, <span class="fl" style="color: #AD0000;">1.0</span>])</span>
+<span id="cb1-58"></span>
+<span id="cb1-59">tp <span class="op" style="color: #5E5E5E;">=</span> np.array((<span class="fl" style="color: #AD0000;">0.28</span>, <span class="fl" style="color: #AD0000;">0.45</span>))</span>
+<span id="cb1-60">trans_angle <span class="op" style="color: #5E5E5E;">=</span> plt.gca().transData.transform_angles(np.array((<span class="dv" style="color: #AD0000;">315</span>,)),</span>
+<span id="cb1-61">                                                   tp.reshape((<span class="dv" style="color: #AD0000;">1</span>, <span class="dv" style="color: #AD0000;">2</span>)))[<span class="dv" style="color: #AD0000;">0</span>]</span>
+<span id="cb1-62">plt.text(tp[<span class="dv" style="color: #AD0000;">0</span>], tp[<span class="dv" style="color: #AD0000;">1</span>], text[<span class="st" style="color: #20794D;">'action_line'</span>], fontsize<span class="op" style="color: #5E5E5E;">=</span><span class="dv" style="color: #AD0000;">12</span>,</span>
+<span id="cb1-63">         rotation<span class="op" style="color: #5E5E5E;">=</span>trans_angle, rotation_mode<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">'anchor'</span>)</span>
+<span id="cb1-64">plt.show()</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-bmap" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://hygorxaraujo.com/posts/2020-03-08-explaining-the-fogg-behavior-model_files/figure-html/fig-bmap-output-1.png" width="629" height="445" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Image based in the Fogg Behavior Model (as presented in the book).</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Looking at the graphic we can see that if there is a prompt for a behavior, but it is something too hard to do or if the motivation is low, the behavior will fail.</p>
+<p>On the contrary, if the behavior is easy to do and we have the motivation when the prompt surges the behavior will be a success!</p>
+<p>Thinking in the process of building new habits, we could use this model as a guide on how to develop a new one. After choosing the right behavior, make sure you have the right motivation for it and make it really easy to do it! In other words, you should make it as simple and small so that there is no chance you will not do it. In this way, each time you are successful with your behavior you are taking a step in making it a new habit.</p>
+<p>A similar conclusion can be thought in the process of stopping a bad habit, make it really hard to do, so that even when the prompt arises you will be less likely to do it.</p>
+<p>This is the suggested template by B. J. Fogg to create a new behavior: &gt; After I …, I will … . Then, I celebrate!</p>
+<p>The celebration is an important step for you to connect the behavior with something positive that should be repeated.</p>
+<p>If you think the behavior you tried to create is not working, try this troubleshoot method: 1. Check prompt 2. Check ability 3. Check motivation</p>
+<p>And keep trying out and learning more about yourself, one small step at a time.</p>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li>Book: <a href="https://www.amazon.com.br/Tiny-Habits-Changes-Everything-English-ebook/dp/B07R6VQBSZ/ref=tmm_kin_title_0?_encoding=UTF8&amp;qid=1583682661&amp;sr=8-1">Tiny Habits: The Small Changes That Change Everything (English Edition)</a></li>
+<li>Site: <a href="https://www.bjfogg.com/">B.J. Fogg</a></li>
+<li>Site: <a href="https://www.tinyhabits.com/">Tiny Habits</a></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>python</category>
+  <category>matplotlib</category>
+  <category>productivity</category>
+  <guid>https://hygorxaraujo.com/posts/2020-03-08-explaining-the-fogg-behavior-model.html</guid>
+  <pubDate>Sun, 08 Mar 2020 03:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>How to check missing values in pandas</title>
+  <dc:creator>Hygor X. Araújo</dc:creator>
+  <link>https://hygorxaraujo.com/posts/2018-06-30-pandas-check-nan.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>In this article I would like to describe how to find NaN values in a pandas DataFrame. This kind of operation can be very useful given that is common to find datasets with missing or incorrect data values.</p>
+<p>I will be using the numpy package to generate some data with NaN values.<!-- TEASER_END --></p>
+<section id="import-necessary-packages" class="level4">
+<h4 class="anchored" data-anchor-id="import-necessary-packages">Import necessary packages</h4>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2018-07-10T09:46:54.528810Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.129573Z&quot;}" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;">import</span> pandas <span class="im" style="color: #00769E;">as</span> pd</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;">import</span> numpy <span class="im" style="color: #00769E;">as</span> np</span>
+<span id="cb1-3"><span class="im" style="color: #00769E;">import</span> platform</span></code></pre></div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2018-07-10T09:46:54.538875Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.532389Z&quot;}" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="bu" style="color: null;">print</span>(<span class="ss" style="color: #20794D;">f'Python version: </span><span class="sc" style="color: #5E5E5E;">{</span>platform<span class="sc" style="color: #5E5E5E;">.</span>python_version()<span class="sc" style="color: #5E5E5E;">}</span><span class="ss" style="color: #20794D;"> (</span><span class="sc" style="color: #5E5E5E;">{</span>platform<span class="sc" style="color: #5E5E5E;">.</span>python_implementation()<span class="sc" style="color: #5E5E5E;">}</span><span class="ss" style="color: #20794D;">)'</span>)</span>
+<span id="cb2-2"><span class="bu" style="color: null;">print</span>(<span class="ss" style="color: #20794D;">f'Pandas version: </span><span class="sc" style="color: #5E5E5E;">{</span>pd<span class="sc" style="color: #5E5E5E;">.</span>__version__<span class="sc" style="color: #5E5E5E;">}</span><span class="ss" style="color: #20794D;">'</span>)</span>
+<span id="cb2-3"><span class="bu" style="color: null;">print</span>(<span class="ss" style="color: #20794D;">f'Numpy version: </span><span class="sc" style="color: #5E5E5E;">{</span>np<span class="sc" style="color: #5E5E5E;">.</span>__version__<span class="sc" style="color: #5E5E5E;">}</span><span class="ss" style="color: #20794D;">'</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Python version: 3.10.7 (CPython)
+Pandas version: 1.5.1
+Numpy version: 1.23.4</code></pre>
+</div>
+</div>
+</section>
+<section id="generate-data-with-nan-values" class="level3">
+<h3 class="anchored" data-anchor-id="generate-data-with-nan-values">Generate data with NaN values</h3>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2018-07-10T09:46:54.710500Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.542433Z&quot;}" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1">num_nan <span class="op" style="color: #5E5E5E;">=</span> <span class="dv" style="color: #AD0000;">25</span> <span class="co" style="color: #5E5E5E;"># number of NaN values wanted in the generated data</span></span>
+<span id="cb4-2">np.random.seed(<span class="dv" style="color: #AD0000;">6765431</span>)  <span class="co" style="color: #5E5E5E;"># set a seed for reproducibility</span></span>
+<span id="cb4-3">A <span class="op" style="color: #5E5E5E;">=</span> np.random.randn(<span class="dv" style="color: #AD0000;">10</span>, <span class="dv" style="color: #AD0000;">10</span>)</span>
+<span id="cb4-4"><span class="bu" style="color: null;">print</span>(A)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[-1.56132314 -0.16954058 -0.17845422 -1.33689111 -0.19185078 -1.18617765
+   0.44499302 -0.61209568  0.31170935  1.4127548 ]
+ [ 0.85330488  0.68517546 -1.10140989  0.84918019  0.72802961 -0.35161197
+   0.73519152  1.13145412  0.53231247  0.78103143]
+ [-0.81614324  0.15906898  0.49940119 -0.09319255 -1.07837721 -0.76053341
+   0.73622083 -0.45518154 -0.69194032  1.02550409]
+ [-1.96339975  0.07593331 -0.16798377 -1.20398958  0.88333656  1.17908422
+   0.26324698 -2.65442248 -0.31583796 -0.16065732]
+ [-1.24321376 -0.89816898  0.02824671  0.15304093  0.56505667 -0.78115883
+   0.74504467  1.14025258 -0.04518221 -0.83908358]
+ [ 1.00967019  0.84240102  1.15043436 -0.40120489  0.00664105 -1.23247563
+   0.64738343  1.66096762 -0.92556683  0.47575796]
+ [ 0.96516278  1.11158059 -0.82155143  0.88900313  2.16943761 -2.05250161
+   2.40156233  0.92453867 -0.24437783 -2.91029265]
+ [-0.86492662  0.82443151 -0.48246862 -1.05183143 -1.15272524 -0.77170733
+   0.07177233  1.02820181 -2.08947076  0.89859677]
+ [-0.07263982 -0.56840867  1.30910275 -0.52846822  0.06019191 -0.61000727
+   0.40782356 -0.36124333 -1.54522486 -0.07891861]
+ [-1.96361682 -1.06315325 -0.45582138 -0.74566868  1.27579529 -2.46306005
+   0.57022673 -0.02793746  0.78652775  1.27690195]]</code></pre>
+</div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2018-07-10T09:46:54.822449Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.713525Z&quot;}" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="co" style="color: #5E5E5E;"># Set random values to nan</span></span>
+<span id="cb6-2">A.ravel()[np.random.choice(A.size, num_nan, replace<span class="op" style="color: #5E5E5E;">=</span><span class="va" style="color: #111111;">False</span>)] <span class="op" style="color: #5E5E5E;">=</span> np.nan</span>
+<span id="cb6-3"><span class="bu" style="color: null;">print</span>(A)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[-1.56132314 -0.16954058 -0.17845422 -1.33689111 -0.19185078 -1.18617765
+          nan -0.61209568  0.31170935  1.4127548 ]
+ [ 0.85330488  0.68517546         nan  0.84918019         nan -0.35161197
+   0.73519152         nan  0.53231247  0.78103143]
+ [-0.81614324  0.15906898  0.49940119         nan -1.07837721 -0.76053341
+   0.73622083         nan -0.69194032  1.02550409]
+ [-1.96339975  0.07593331         nan -1.20398958  0.88333656         nan
+   0.26324698         nan -0.31583796 -0.16065732]
+ [-1.24321376 -0.89816898  0.02824671  0.15304093  0.56505667 -0.78115883
+   0.74504467  1.14025258 -0.04518221 -0.83908358]
+ [ 1.00967019  0.84240102         nan -0.40120489  0.00664105         nan
+   0.64738343  1.66096762 -0.92556683  0.47575796]
+ [ 0.96516278         nan -0.82155143  0.88900313  2.16943761         nan
+   2.40156233         nan -0.24437783         nan]
+ [-0.86492662  0.82443151 -0.48246862 -1.05183143 -1.15272524 -0.77170733
+   0.07177233  1.02820181 -2.08947076         nan]
+ [-0.07263982         nan  1.30910275 -0.52846822  0.06019191 -0.61000727
+   0.40782356 -0.36124333         nan         nan]
+ [        nan         nan         nan         nan  1.27579529 -2.46306005
+          nan         nan  0.78652775  1.27690195]]</code></pre>
+</div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2018-07-10T09:46:54.956204Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.824755Z&quot;}" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="co" style="color: #5E5E5E;"># Create a DataFrame from the generated data</span></span>
+<span id="cb8-2">df <span class="op" style="color: #5E5E5E;">=</span> pd.DataFrame(A)</span>
+<span id="cb8-3">df</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-1.561323</td>
+      <td>-0.169541</td>
+      <td>-0.178454</td>
+      <td>-1.336891</td>
+      <td>-0.191851</td>
+      <td>-1.186178</td>
+      <td>NaN</td>
+      <td>-0.612096</td>
+      <td>0.311709</td>
+      <td>1.412755</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.853305</td>
+      <td>0.685175</td>
+      <td>NaN</td>
+      <td>0.849180</td>
+      <td>NaN</td>
+      <td>-0.351612</td>
+      <td>0.735192</td>
+      <td>NaN</td>
+      <td>0.532312</td>
+      <td>0.781031</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.816143</td>
+      <td>0.159069</td>
+      <td>0.499401</td>
+      <td>NaN</td>
+      <td>-1.078377</td>
+      <td>-0.760533</td>
+      <td>0.736221</td>
+      <td>NaN</td>
+      <td>-0.691940</td>
+      <td>1.025504</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-1.963400</td>
+      <td>0.075933</td>
+      <td>NaN</td>
+      <td>-1.203990</td>
+      <td>0.883337</td>
+      <td>NaN</td>
+      <td>0.263247</td>
+      <td>NaN</td>
+      <td>-0.315838</td>
+      <td>-0.160657</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-1.243214</td>
+      <td>-0.898169</td>
+      <td>0.028247</td>
+      <td>0.153041</td>
+      <td>0.565057</td>
+      <td>-0.781159</td>
+      <td>0.745045</td>
+      <td>1.140253</td>
+      <td>-0.045182</td>
+      <td>-0.839084</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1.009670</td>
+      <td>0.842401</td>
+      <td>NaN</td>
+      <td>-0.401205</td>
+      <td>0.006641</td>
+      <td>NaN</td>
+      <td>0.647383</td>
+      <td>1.660968</td>
+      <td>-0.925567</td>
+      <td>0.475758</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.965163</td>
+      <td>NaN</td>
+      <td>-0.821551</td>
+      <td>0.889003</td>
+      <td>2.169438</td>
+      <td>NaN</td>
+      <td>2.401562</td>
+      <td>NaN</td>
+      <td>-0.244378</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>-0.864927</td>
+      <td>0.824432</td>
+      <td>-0.482469</td>
+      <td>-1.051831</td>
+      <td>-1.152725</td>
+      <td>-0.771707</td>
+      <td>0.071772</td>
+      <td>1.028202</td>
+      <td>-2.089471</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>-0.072640</td>
+      <td>NaN</td>
+      <td>1.309103</td>
+      <td>-0.528468</td>
+      <td>0.060192</td>
+      <td>-0.610007</td>
+      <td>0.407824</td>
+      <td>-0.361243</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.275795</td>
+      <td>-2.463060</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.786528</td>
+      <td>1.276902</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="check-for-nan-values" class="level3">
+<h3 class="anchored" data-anchor-id="check-for-nan-values">Check for NaN values</h3>
+<p>Now that we have some data to operate on let’s see the different ways we can check for missing values.</p>
+<p>There are two methods of the DataFrame object that can be used: <code>DataFrame#isna()</code> and <code>DataFrame#isnull()</code>. But if you check the source code it seems that <code>isnull()</code> is only an alias for the <code>isna()</code> method. To keep it simple I will only use the <code>isna()</code> method as we would get the same result using <code>isnull()</code>.</p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.065320Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.958256Z&quot;}" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1">df.isna()</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>As it can be seen above when we use the <code>isna()</code> method it returns a DataFrame with boolean values, where <code>True</code> indicates NaN values and <code>False</code> otherwise.</p>
+<p>If we wanted to know how many missing values there are on each row or column we could use the <code>DataFrame#sum()</code> method:</p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.185760Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.067021Z&quot;}" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1">df.isna().<span class="bu" style="color: null;">sum</span>(axis<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">'rows'</span>)  <span class="co" style="color: #5E5E5E;"># 'rows' or 0</span></span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>0    1
+1    3
+2    4
+3    2
+4    1
+5    3
+6    2
+7    5
+8    1
+9    3
+dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.288862Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.187682Z&quot;}" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1">df.isna().<span class="bu" style="color: null;">sum</span>(axis<span class="op" style="color: #5E5E5E;">=</span><span class="st" style="color: #20794D;">'columns'</span>)  <span class="co" style="color: #5E5E5E;"># 'columns' or 1</span></span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>0    1
+1    3
+2    2
+3    3
+4    0
+5    2
+6    4
+7    1
+8    3
+9    6
+dtype: int64</code></pre>
+</div>
+</div>
+<p>To simply know the total number of missing values we can call <code>sum()</code> again:</p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.400051Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.290994Z&quot;}" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1">df.isna().<span class="bu" style="color: null;">sum</span>().<span class="bu" style="color: null;">sum</span>()</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>25</code></pre>
+</div>
+</div>
+<p>If we simply wanna know if there is any missing value with no care for the quantity we can simply use the <code>any()</code> method:</p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.516972Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.402633Z&quot;}" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1">df.isna().<span class="bu" style="color: null;">any</span>()  <span class="co" style="color: #5E5E5E;"># can also receive axis='rows' or 'columns'</span></span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>0    True
+1    True
+2    True
+3    True
+4    True
+5    True
+6    True
+7    True
+8    True
+9    True
+dtype: bool</code></pre>
+</div>
+</div>
+<p>Calling it again we have a single boolean output:</p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.634347Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.518727Z&quot;}" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1">df.isna().<span class="bu" style="color: null;">any</span>().<span class="bu" style="color: null;">any</span>()</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>True</code></pre>
+</div>
+</div>
+<p>Besides the <code>isna()</code> method we also have the <code>notna()</code> method which is its boolean inverse. Applying it we can get the number of values that are not missing or simply if all values are not missing (but using the <code>all()</code> method instead of <code>any()</code>).</p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.755759Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.636133Z&quot;}" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><span class="bu" style="color: null;">print</span>(df.notna().<span class="bu" style="color: null;">sum</span>().<span class="bu" style="color: null;">sum</span>())  <span class="co" style="color: #5E5E5E;"># not missing</span></span>
+<span id="cb20-2"><span class="bu" style="color: null;">print</span>(df.notna().<span class="bu" style="color: null;">all</span>().<span class="bu" style="color: null;">all</span>())</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>75
+False</code></pre>
+</div>
+</div>
+<p>Note 1: in the examples, it was used the DataFrame methods to check for missing values, but the pandas package has its own functions with the same purpose that can be applied to other objects. Example:</p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.875265Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.757785Z&quot;}" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><span class="bu" style="color: null;">print</span>(pd.isna([<span class="dv" style="color: #AD0000;">1</span>, <span class="dv" style="color: #AD0000;">2</span>, np.nan]))</span>
+<span id="cb22-2"><span class="bu" style="color: null;">print</span>(pd.notna([<span class="dv" style="color: #AD0000;">1</span>, <span class="dv" style="color: #AD0000;">2</span>, np.nan]))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[False False  True]
+[ True  True False]</code></pre>
+</div>
+</div>
+<p>Note 2: the methods applied here on DataFrame objects are also available for Series and Index objects.</p>
+</section>
+<section id="time-comparison" class="level3">
+<h3 class="anchored" data-anchor-id="time-comparison">Time comparison</h3>
+<p>Comparing the time taken by the two methods we can see that using <code>any()</code> is faster but <code>sum()</code> will give us the additional information about how many missing values there are.</p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2018-07-10T09:46:58.700850Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.876821Z&quot;}" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><span class="op" style="color: #5E5E5E;">%</span>timeit df.isna().<span class="bu" style="color: null;">any</span>().<span class="bu" style="color: null;">any</span>()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>274 µs ± 3.76 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)</code></pre>
+</div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2018-07-10T09:47:03.356772Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:58.702580Z&quot;}" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><span class="op" style="color: #5E5E5E;">%</span>timeit df.isna().<span class="bu" style="color: null;">sum</span>().<span class="bu" style="color: null;">sum</span>()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>254 µs ± 1.15 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)</code></pre>
+</div>
+</div>
+</section>
+<section id="dealing-with-missing-values" class="level3">
+<h3 class="anchored" data-anchor-id="dealing-with-missing-values">Dealing with missing values</h3>
+<p>Two easy ways to deal with missing values are removing them or filling them with some value. These can be achieved with the <code>dropna()</code> and <code>fillna()</code> methods.</p>
+<p>The <code>dropna()</code> method will return a DataFrame without the rows and columns containing missing values.</p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2018-07-10T09:47:03.392158Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:47:03.359645Z&quot;}" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1">df.dropna()</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>-1.243214</td>
+      <td>-0.898169</td>
+      <td>0.028247</td>
+      <td>0.153041</td>
+      <td>0.565057</td>
+      <td>-0.781159</td>
+      <td>0.745045</td>
+      <td>1.140253</td>
+      <td>-0.045182</td>
+      <td>-0.839084</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The <code>fillna()</code> method will return a DataFrame with the missing values filled with a specified value.</p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2018-07-10T09:47:03.504912Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:47:03.395757Z&quot;}" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1">df.fillna(value<span class="op" style="color: #5E5E5E;">=</span><span class="dv" style="color: #AD0000;">5</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-1.561323</td>
+      <td>-0.169541</td>
+      <td>-0.178454</td>
+      <td>-1.336891</td>
+      <td>-0.191851</td>
+      <td>-1.186178</td>
+      <td>5.000000</td>
+      <td>-0.612096</td>
+      <td>0.311709</td>
+      <td>1.412755</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.853305</td>
+      <td>0.685175</td>
+      <td>5.000000</td>
+      <td>0.849180</td>
+      <td>5.000000</td>
+      <td>-0.351612</td>
+      <td>0.735192</td>
+      <td>5.000000</td>
+      <td>0.532312</td>
+      <td>0.781031</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.816143</td>
+      <td>0.159069</td>
+      <td>0.499401</td>
+      <td>5.000000</td>
+      <td>-1.078377</td>
+      <td>-0.760533</td>
+      <td>0.736221</td>
+      <td>5.000000</td>
+      <td>-0.691940</td>
+      <td>1.025504</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-1.963400</td>
+      <td>0.075933</td>
+      <td>5.000000</td>
+      <td>-1.203990</td>
+      <td>0.883337</td>
+      <td>5.000000</td>
+      <td>0.263247</td>
+      <td>5.000000</td>
+      <td>-0.315838</td>
+      <td>-0.160657</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-1.243214</td>
+      <td>-0.898169</td>
+      <td>0.028247</td>
+      <td>0.153041</td>
+      <td>0.565057</td>
+      <td>-0.781159</td>
+      <td>0.745045</td>
+      <td>1.140253</td>
+      <td>-0.045182</td>
+      <td>-0.839084</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1.009670</td>
+      <td>0.842401</td>
+      <td>5.000000</td>
+      <td>-0.401205</td>
+      <td>0.006641</td>
+      <td>5.000000</td>
+      <td>0.647383</td>
+      <td>1.660968</td>
+      <td>-0.925567</td>
+      <td>0.475758</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.965163</td>
+      <td>5.000000</td>
+      <td>-0.821551</td>
+      <td>0.889003</td>
+      <td>2.169438</td>
+      <td>5.000000</td>
+      <td>2.401562</td>
+      <td>5.000000</td>
+      <td>-0.244378</td>
+      <td>5.000000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>-0.864927</td>
+      <td>0.824432</td>
+      <td>-0.482469</td>
+      <td>-1.051831</td>
+      <td>-1.152725</td>
+      <td>-0.771707</td>
+      <td>0.071772</td>
+      <td>1.028202</td>
+      <td>-2.089471</td>
+      <td>5.000000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>-0.072640</td>
+      <td>5.000000</td>
+      <td>1.309103</td>
+      <td>-0.528468</td>
+      <td>0.060192</td>
+      <td>-0.610007</td>
+      <td>0.407824</td>
+      <td>-0.361243</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>1.275795</td>
+      <td>-2.463060</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>0.786528</td>
+      <td>1.276902</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">References:</h3>
+<ul>
+<li><a href="https://stackoverflow.com/questions/32182409/create-sample-numpy-array-with-randomly-placed-nans">Create sample numpy array with randomly placed NaNs (StackOverflow)</a></li>
+<li><a href="https://stackoverflow.com/questions/29530232/how-to-check-if-any-value-is-nan-in-a-pandas-dataframe">How to check if any value is NaN in a Pandas DataFrame (StackOverflow)</a></li>
+<li><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.isnull.html">pandas.isnull</a></li>
+<li><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.isna.html">pandas.isna</a></li>
+<li><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.notna.html">pandas.notna</a></li>
+<li><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.dropna.html">pandas.DataFrame.dropna</a></li>
+<li><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.fillna.html">pandas.DataFrame.fillna</a></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>python</category>
+  <category>pandas</category>
+  <category>numpy</category>
+  <guid>https://hygorxaraujo.com/posts/2018-06-30-pandas-check-nan.html</guid>
+  <pubDate>Sat, 30 Jun 2018 03:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
