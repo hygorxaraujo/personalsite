@@ -1,0 +1,60 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="47">
+            <item index="0" class="java.lang.String" itemvalue="radon" />
+            <item index="1" class="java.lang.String" itemvalue="pathspec" />
+            <item index="2" class="java.lang.String" itemvalue="ptyprocess" />
+            <item index="3" class="java.lang.String" itemvalue="cython" />
+            <item index="4" class="java.lang.String" itemvalue="mypy" />
+            <item index="5" class="java.lang.String" itemvalue="pickleshare" />
+            <item index="6" class="java.lang.String" itemvalue="pytest-clarity" />
+            <item index="7" class="java.lang.String" itemvalue="mando" />
+            <item index="8" class="java.lang.String" itemvalue="mypy-extensions" />
+            <item index="9" class="java.lang.String" itemvalue="wcwidth" />
+            <item index="10" class="java.lang.String" itemvalue="pytest-xdist" />
+            <item index="11" class="java.lang.String" itemvalue="executing" />
+            <item index="12" class="java.lang.String" itemvalue="pytest-mypy" />
+            <item index="13" class="java.lang.String" itemvalue="snowballstemmer" />
+            <item index="14" class="java.lang.String" itemvalue="pytest-cov" />
+            <item index="15" class="java.lang.String" itemvalue="pytest-mock" />
+            <item index="16" class="java.lang.String" itemvalue="stack-data" />
+            <item index="17" class="java.lang.String" itemvalue="tox" />
+            <item index="18" class="java.lang.String" itemvalue="commonmark" />
+            <item index="19" class="java.lang.String" itemvalue="coverage" />
+            <item index="20" class="java.lang.String" itemvalue="glob2" />
+            <item index="21" class="java.lang.String" itemvalue="pytest" />
+            <item index="22" class="java.lang.String" itemvalue="iniconfig" />
+            <item index="23" class="java.lang.String" itemvalue="black" />
+            <item index="24" class="java.lang.String" itemvalue="pylama" />
+            <item index="25" class="java.lang.String" itemvalue="ipython" />
+            <item index="26" class="java.lang.String" itemvalue="parse" />
+            <item index="27" class="java.lang.String" itemvalue="pytest-asyncio" />
+            <item index="28" class="java.lang.String" itemvalue="vulture" />
+            <item index="29" class="java.lang.String" itemvalue="pure-eval" />
+            <item index="30" class="java.lang.String" itemvalue="asttokens" />
+            <item index="31" class="java.lang.String" itemvalue="backcall" />
+            <item index="32" class="java.lang.String" itemvalue="eradicate" />
+            <item index="33" class="java.lang.String" itemvalue="tox-pipenv" />
+            <item index="34" class="java.lang.String" itemvalue="pylint" />
+            <item index="35" class="java.lang.String" itemvalue="distlib" />
+            <item index="36" class="java.lang.String" itemvalue="isort" />
+            <item index="37" class="java.lang.String" itemvalue="pprintpp" />
+            <item index="38" class="java.lang.String" itemvalue="pytest-bdd" />
+            <item index="39" class="java.lang.String" itemvalue="pytest-randomly" />
+            <item index="40" class="java.lang.String" itemvalue="jinja2" />
+            <item index="41" class="java.lang.String" itemvalue="pyyaml" />
+            <item index="42" class="java.lang.String" itemvalue="colorlog" />
+            <item index="43" class="java.lang.String" itemvalue="tornado" />
+            <item index="44" class="java.lang.String" itemvalue="jupyter_client" />
+            <item index="45" class="java.lang.String" itemvalue="botocore" />
+            <item index="46" class="java.lang.String" itemvalue="awscli" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

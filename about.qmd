@@ -1,0 +1,33 @@
+---
+title: "About"
+image: profile.jpg
+about:
+  template: jolla
+  image-shape: round
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/in/hygorxaraujo
+    - icon: github
+      text: Github
+      href: https://github.com/hygorxaraujo
+    - icon: envelope
+      text: E-mail
+      url: "mailto:contact@hygorxaraujo.com"
+---
+
+**Hello, I'm Hygor!**
+
+I am a Data Scientist working as a consultant in projects for different areas like retail, health care, supply chain, etc.
+
+I also have more than seven years of experience as a Systems Architect, Analyst and Software Engineer in the development of web-based and mobile applications.
+
+In my Masters, I worked with research in the Machine Learning area, mainly in the development of a method related to semi-supervised learning.
+
+My interest is mainly in working on solutions that need to employ the use of data, AI, and Machine Learning methods to deliver better or new capabilities for the users.
+
+## Education
+
+2019 - Masters in Computer Science with focus on Computational Intelligence - Universidade Federal de Juiz de Fora (UFJF)
+
+2017 - Bachelor in Computer Science - UFJF
