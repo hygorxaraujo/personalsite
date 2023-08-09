@@ -6,8 +6,13 @@ website:
   site-url: https://hygorxaraujo.com/
   description: My personal blog
   open-graph: true
-  google-analytics: G-FBHJ31L8R4
-  cookie-consent: true
+  cookie-consent:
+    type: express
+    style: headline
+    palette: dark
+  google-analytics:
+    tracking-id: "G-FBHJ31L8R4"
+    version: 4
   navbar:
     right:
       - about.qmd
