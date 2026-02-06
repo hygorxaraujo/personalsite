@@ -1,15 +1,27 @@
 project:
   type: website
+  resources:
+    - "assets/"
+  render:
+    - "posts/"
+    - "index.qmd"
+    - "about.qmd"
+    - "!templates/"
 
 website:
   title: "hygorxaraujo"
-  site-url: https://hygorxaraujo.com/
   description: My personal blog
+  site-url: "https://hygorxaraujo.com/"
+  repo-url: "https://github.com/hygorxaraujo/personalsite"
+  repo-branch: "gh-pages"
+  issue-url: "https://github.com/hygorxaraujo/personalsite/issues"
+  reader-mode: true
+  page-navigation: true
+  back-to-top-navigation: true
+  bread-crumbs: true
   open-graph: true
   cookie-consent:
     type: express
-    style: headline
-    palette: dark
   google-analytics:
     tracking-id: "G-FBHJ31L8R4"
     version: 4
@@ -18,11 +30,12 @@ website:
       - about.qmd
       - icon: rss
         href: index.xml
+
 format:
   html:
     theme:
-      light: sandstone
-      dark: solar
+      light: flatly
+      dark: darkly
     css: styles.css
     toc: true
     code-line-numbers: true

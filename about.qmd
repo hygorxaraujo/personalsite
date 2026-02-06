@@ -2,7 +2,7 @@
 title: "About"
 image: assets/profile.jpg
 about:
-  template: jolla
+  template: trestles
   image-shape: round
   links:
     - icon: linkedin
@@ -18,7 +18,7 @@ about:
 
 **Hello, I'm Hygor!**
 
-I am a Data Scientist working as a consultant in projects for different areas like retail, health care, supply chain, etc.
+I am a Data Scientist working as a consultant in projects for different areas like retail, supply chain, etc.
 
 I also have more than seven years of experience as a Systems Architect, Analyst and Software Engineer in the development of web-based and mobile applications.
 
@@ -28,6 +28,8 @@ My interest is mainly in working on solutions that need to employ the use of dat
 
 ## Education
 
+Ongoing - MBA in AI and Big Data - Universidade de São Paulo (USP)
+
 2019 - Masters in Computer Science with focus on Computational Intelligence - Universidade Federal de Juiz de Fora (UFJF)
 
-2017 - Bachelor in Computer Science - UFJF
+2017 - Bachelor in Computer Science - Universidade Federal de Juiz de Fora (UFJF)

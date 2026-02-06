@@ -7,6 +7,9 @@ freeze: true
 # Enable banner style title blocks
 title-block-banner: true
 
-author: "Hygor X. Araújo"
+author:
+  - name: "Hygor X. Araújo"
+    image: "/assets/profile.jpg"
+    url: "/about.html"
 badges: false
 branch: main

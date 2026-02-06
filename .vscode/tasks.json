@@ -6,7 +6,19 @@
         {
             "label": "preview",
             "type": "shell",
-            "command": "quarto preview"
+            "command": "quarto preview --port 4200 --no-browser",
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "custom",
+                "pattern": {
+                    "regexp": "^Browse at (http://localhost:[0-9]+)/"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^Watching files for changes",
+                    "endsPattern": "^Browse at http://localhost:[0-9]+/"
+                }
+            }
         }
     ]
 }
