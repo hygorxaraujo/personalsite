@@ -1,1 +1,39 @@
-/* css styles */
+/* * Target the author name container.
+ * We use two selectors for robustness:
+ * 1. Standard Quarto: .quarto-title-meta-author ...
+ * 2. Fallback (First meta block): .quarto-title-meta > div:first-child ...
+ * * We target 'p' directly (removing .author class requirement) to handle linked names.
+ */
+div.quarto-title-meta-author div.quarto-title-meta-contents p::before,
+div.quarto-title-meta > div:first-child div.quarto-title-meta-contents p::before {
+    content: "";
+    display: inline-block;
+    width: 2.5rem;
+    height: 2.5rem;
+
+    /* Spacing adjustment */
+    margin-right: 0.75rem;
+
+    /* Image Handling */
+    background-image: url('/assets/profile.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* Aesthetics */
+    border-radius: 50%;
+    border: 2px solid var(--bs-primary);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+    /* Vertical Alignment fixes */
+    flex-shrink: 0; /* Prevent avatar from shrinking */
+}
+
+/* Flex layout to align avatar and text (which might contain a link) */
+div.quarto-title-meta-author div.quarto-title-meta-contents p,
+div.quarto-title-meta > div:first-child div.quarto-title-meta-contents p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    line-height: 2.5rem; /* Match avatar height for perfect centering */
+}
