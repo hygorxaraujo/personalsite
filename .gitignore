@@ -1,12 +1,23 @@
-# quarto
+# Quarto
 /.quarto/
 /_site/
 /.luarc.json
-
 **/*.quarto_ipynb
 
-# Python bytecode
+# Python
+.venv/
 __pycache__/
 *.pyc
-
 *.egg-info
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.python-version
+.jbeval/
+
+# IDEs
+.idea/
+.vscode/
+
+# System
+.DS_Store
