@@ -7,6 +7,9 @@ freeze: true
 # Enable banner style title blocks
 title-block-banner: true
 
+# Default image for listing
+image: "/assets/profile.jpg"
+
 author:
   - name: "Hygor X. Araújo"
     image: "/assets/profile.jpg"
