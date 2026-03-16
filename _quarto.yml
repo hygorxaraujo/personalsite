@@ -34,10 +34,12 @@ website:
 format:
   html:
     theme:
-      light: flatly
-      dark: darkly
-    css: styles.css
+      light: [zephyr, custom.scss]
+      dark: [darkly, custom.scss]
     toc: true
     code-line-numbers: true
+    mermaid:
+      theme: dark
+
 execute:
   enabled: true

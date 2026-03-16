@@ -1,0 +1,220 @@
+/*-- scss:defaults --*/
+
+// Brand Palette: "The Neural Network"
+$brand-emerald: #198754;
+$brand-indigo: #1B1B3A;
+$brand-mint: #00FF87;
+$brand-slate: #0F172A;
+$brand-violet: #7C3AED;
+
+// Custom Colors
+$primary: $brand-emerald; // Emerald Green
+$secondary: $brand-indigo;
+
+// Typography
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+$font-family-sans-serif: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$headings-font-family: 'Space Grotesk', sans-serif;
+$font-family-monospace: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+// Font sizes
+$font-size-base: 1.05rem;
+$headings-font-weight: 600;
+
+/*-- scss:rules --*/
+
+// Avatar Styling (Migrated from styles.css)
+div.quarto-title-meta-author div.quarto-title-meta-contents p::before,
+div.quarto-title-meta > div:first-child div.quarto-title-meta-contents p::before {
+    content: "";
+    display: inline-block;
+    width: 2.5rem;
+    height: 2.5rem;
+
+    /* Spacing adjustment */
+    margin-right: 0.75rem;
+
+    /* Image Handling */
+    background-image: url('/assets/profile.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* Aesthetics */
+    border-radius: 50%;
+    border: 2px solid var(--bs-primary);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+    /* Vertical Alignment fixes */
+    flex-shrink: 0; /* Prevent avatar from shrinking */
+}
+
+/* Flex layout to align avatar and text */
+div.quarto-title-meta-author div.quarto-title-meta-contents p,
+div.quarto-title-meta > div:first-child div.quarto-title-meta-contents p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    line-height: 2.5rem; /* Match avatar height for perfect centering */
+}
+
+// Custom technical details
+.code-copy-button {
+    border: none !important;
+    background-color: transparent !important;
+    opacity: 0.5;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.code-copy-button:hover {
+    opacity: 1;
+}
+
+// Hero banner styling
+.hero-banner {
+    padding: 4rem 2rem;
+    margin-bottom: 3rem;
+    border-radius: 1rem;
+    background: rgba(var(--bs-primary-rgb), 0.05);
+    border: 1px solid rgba(var(--bs-primary-rgb), 0.1);
+    text-align: center;
+
+    h1 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    h3 {
+        font-weight: 400;
+        opacity: 0.8;
+    }
+}
+
+// Listing card hover effects
+.quarto-post {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border-radius: 0.75rem !important;
+    overflow: hidden;
+    padding: 0 !important;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(var(--bs-primary-rgb), 0.1) !important;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        border-color: rgba(var(--bs-primary-rgb), 0.3) !important;
+    }
+
+    .thumbnail {
+        border-bottom: 1px solid rgba(var(--bs-primary-rgb), 0.1);
+    }
+
+    .listing-categories {
+        padding: 0 1rem;
+    }
+
+    .body {
+        padding: 1.5rem;
+    }
+}
+
+// Code block improvements
+.cell-output-display pre, .sourceCode pre {
+    border: 1px solid rgba(var(--bs-primary-rgb), 0.2) !important;
+    border-radius: 0.5rem !important;
+    background-color: rgba(var(--bs-primary-rgb), 0.02) !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bs-primary);
+    border-radius: 5px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bs-primary);
+}
+
+// Subtle grid pattern for header
+#quarto-header {
+    background-image: 
+        linear-gradient(rgba(var(--bs-primary-rgb), 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--bs-primary-rgb), 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+// Mermaid Diagram Improvements
+.mermaid {
+    background: transparent !important;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    // Target specifically within the SVG to avoid leaking styles to text
+    svg {
+        text, tspan {
+            fill: var(--quarto-body-color) !important;
+        }
+
+        .node rect, .node circle, .node ellipse, .node polygon, .node path {
+            fill: rgba(var(--bs-primary-rgb), 0.1) !important;
+            stroke: var(--bs-primary) !important;
+            stroke-width: 1px !important;
+        }
+
+        .edgePath .path {
+            stroke: var(--bs-primary) !important;
+            stroke-width: 1.5px !important;
+        }
+
+        .cluster rect {
+            fill: rgba(var(--bs-primary-rgb), 0.05) !important;
+            stroke: rgba(var(--bs-primary-rgb), 0.2) !important;
+            stroke-dasharray: 5, 5 !important;
+        }
+
+        .label, .labelText, .loopText, .noteText, .messageText, .actor {
+            color: var(--quarto-body-color) !important;
+            fill: var(--quarto-body-color) !important;
+        }
+    }
+}
+
+// Sequence diagram specific fixes
+.mermaid .actor {
+    fill: rgba(var(--bs-primary-rgb), 0.1) !important;
+    stroke: var(--bs-primary) !important;
+}
+
+// Ensure Mermaid text is legible in dark mode specifically
+body.quarto-dark {
+    .mermaid svg {
+        text, tspan, .label, .messageText, .actor-man, .labelText, .loopText, .noteText, .actor {
+            fill: #e9ecef !important;
+            color: #e9ecef !important;
+        }
+        
+        // Fix markers (arrows) in dark mode
+        marker {
+            fill: #e9ecef !important;
+            stroke: #e9ecef !important;
+        }
+
+        .cluster rect {
+            fill: rgba(255, 255, 255, 0.02) !important;
+        }
+    }
+}
