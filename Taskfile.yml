@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+
+tasks:
+  default:
+    desc: Print list of tasks
+    cmds:
+      - task --list-all
+    silent: true
+
+  sync:
+    desc: Install/Update Python dependencies
+    cmd: uv sync
+
+  preview:
+    desc: Start Quarto preview server
+    cmd: quarto preview
+
+  render:
+    desc: Render (build) the site
+    cmd: quarto render
+
+  publish:
+    desc: Publish the site to GitHub Pages
+    cmd: quarto publish gh-pages

@@ -11,12 +11,17 @@ This project is the personal website and blog of Hygor, built using [Quarto](htt
 
 ## Development Workflow
 
+### Constraints
+- **No content generation:** The agent must not write blog posts, articles, or documentation. It acts as a technical assistant only.
+
 ### Prerequisites
 - Quarto CLI installed
 - Python installed
 - `uv` package manager installed
+- Task (for automation)
 
 ### Common Commands
+Use `Taskfile.yml` for automation.
 
 **Install Dependencies:**
 ```bash
@@ -24,21 +29,20 @@ uv sync
 ```
 
 **Run Development Server (Preview):**
-Start a local server with live reload.
 ```bash
-quarto preview
+task preview
 ```
 
 **Render Site (Build):**
 Build the static site to the `_site/` directory.
 ```bash
-quarto render
+task render
 ```
 
 **Publish:**
 Publish the site to GitHub Pages.
 ```bash
-quarto publish gh-pages
+task publish
 ```
 
 ## Project Structure
