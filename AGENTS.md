@@ -58,6 +58,8 @@ task publish
 - **`_site/`**: The generated static website (output directory).
 
 ## Conventions
+- **Planning:** We will always plan what should be done first as sprints in the `docs/sprints/<current_year>` directory. Follow the file name convention "<sprint_number>_<sprint_name>.md" and always save the planning to this location. No changes will be made to ClickUp until the plan has been reviewed and approved by you.
+- **Project changes:** Structural changes should be first documented as Architectural Decision Records (ADRs) on `docs/adrs` following the file name convention and using the Markdown Architectural Decision Records (MADRs) template.
 - **Content:** Blog posts are located in the `posts/` directory. Each post is typically its own folder or file.
 - **Execution:** Quarto executes code cells in `.ipynb` files during rendering. Ensure the Python environment (managed by `uv`) is active or accessible to Quarto.
 - **Theme:** The site uses the `flatly` theme for light mode and `darkly` for dark mode, configured in `_quarto.yml`.

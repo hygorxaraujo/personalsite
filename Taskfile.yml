@@ -1,26 +1,34 @@
-# yaml-language-server: $schema=https://taskfile.dev/schema.json
-
 version: '3'
 
 tasks:
-  default:
-    desc: Print list of tasks
+  dev:
+    desc: Start live reload server
     cmds:
-      - task --list-all
-    silent: true
+      - quarto preview
+
+  build:
+    desc: Render site to _site/ directory
+    cmds:
+      - quarto render
+
+  clean:
+    desc: Remove _site/ and _freeze/ folders
+    cmds:
+      - rm -rf _site/ _freeze/
 
   sync:
-    desc: Install/Update Python dependencies
-    cmd: uv sync
+    desc: Sync python dependencies
+    cmds:
+      - uv sync
 
-  preview:
-    desc: Start Quarto preview server
-    cmd: quarto preview
-
-  render:
-    desc: Render (build) the site
-    cmd: quarto render
+  new_post:
+    desc: "Create a new post from template. Usage: task new_post TITLE="
+    cmds:
+      - uv run scripts/new_post.py "{{.TITLE}}"
 
   publish:
     desc: Publish the site to GitHub Pages
-    cmd: quarto publish gh-pages
+    deps:
+      - build
+    cmds:
+      - quarto publish gh-pages
