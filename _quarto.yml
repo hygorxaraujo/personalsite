@@ -13,6 +13,7 @@ website:
   title: "hygorxaraujo"
   description: My personal blog
   site-url: "https://hygorxaraujo.com/"
+  favicon: assets/favicon.ico
   repo-url: "https://github.com/hygorxaraujo/personalsite"
   repo-branch: "gh-pages"
   issue-url: "https://github.com/hygorxaraujo/personalsite/issues"

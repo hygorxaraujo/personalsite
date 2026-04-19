@@ -72,6 +72,12 @@ div.quarto-title-meta > div:first-child div.quarto-title-meta-contents p {
 }
 
 // Hero banner styling
+.quarto-title-banner {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
 .hero-banner {
     padding: 4rem 2rem;
     margin-bottom: 3rem;
