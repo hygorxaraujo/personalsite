@@ -1,6 +1,7 @@
 ---
 title: "About"
 pagetitle: "About — Hygor X. Araújo"
+description: "Learn about Hygor X. Araújo, a Data Scientist and Systems Architect bridging the gap between complex software systems and intelligent reasoning, with an M.Sc. in Computational Intelligence and USP AI MBA."
 page-layout: full
 title-block-banner: false
 toc: false
