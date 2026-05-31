@@ -381,6 +381,32 @@ body:has(.about-custom) .quarto-title-banner { display: none; }
   }
 }
 
+.about-social-links {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+  font-family: $font-family-monospace;
+  font-size: 0.74rem;
+  justify-content: center;
+  width: 100%;
+  max-width: 320px;
+  
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: $ink-soft;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      color: $emerald-deep;
+      border-color: $emerald-line;
+      text-decoration: none;
+    }
+  }
+}
+
 .about-content-wrap {
   max-width: 68ch;
 }
