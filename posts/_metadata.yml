@@ -4,11 +4,10 @@
 # (see https://quarto.org/docs/projects/code-execution.html#freeze)
 freeze: true
 
-# Enable banner style title blocks
-title-block-banner: true
-
 # Default image for listing
-image: "/assets/profile.jpg"
+image: "/assets/headers/default_header.svg"
+title-block-banner: "url(/assets/headers/default_header.svg)"
+title-block-banner-color: "#198754"
 
 author:
   - name: "Hygor X. Araújo"
