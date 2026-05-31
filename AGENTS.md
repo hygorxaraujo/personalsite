@@ -56,6 +56,12 @@ Publish the site to GitHub Pages.
 task publish
 ```
 
+**Inject Jupyter Notebook SEO:**
+Run helper utility to insert description/title metadata safely inside `.ipynb` JSON cells.
+```bash
+python3 scripts/add_post_seo.py posts/my-post.ipynb "My post description snippet." "Optional Title"
+```
+
 **Generate Header:**
 Generate gem mesh SVG header (entry point in pyproject.toml).
 ```bash
@@ -90,5 +96,7 @@ gen-header
 
 ## Gotchas / Quirks
 - **Styles:** `styles.css` does NOT exist. Use `custom.scss` (shared) and `custom-dark.scss` (dark mode overrides).
+- **SEO Preview Images:** Social media crawlers (LinkedIn, X, Slack, Facebook) do **NOT** support SVG images for social previews. The global fallback image in `_quarto.yml` is set to `assets/profile.jpg` (JPEG) to prevent broken social cards while retaining dynamic SVGs on-site.
+- **Notebook Edits:** Jupyter Notebooks (`.ipynb`) are JSON files with embedded raw cells. Do not attempt direct regex/string edits as they are structurally blocked. Use `scripts/add_post_seo.py` for safe parsing and updates.
 - **Notebook caching:** The `_freeze/` directory caches notebook output. Run `task clean` if outputs seem stale or aren't updating.
 - **Environment:** Quarto needs the `uv` environment active to run cells during render.
