@@ -311,3 +311,277 @@ code:not(.sourceCode) { color: $emerald-deep; background: $emerald-tint; padding
   .edgePath .path { stroke: $emerald !important; stroke-width: 1.5px !important; }
   .cluster rect { fill: rgba(11, 122, 82, 0.04) !important; stroke: $emerald-line !important; stroke-dasharray: 5, 5 !important; }
 }
+
+// ── Custom About Page (Editorial Layout) ──────────────────────
+body:has(.about-custom) #title-block-header { display: none; }
+body:has(.about-custom) .quarto-title-banner { display: none; }
+
+.about-custom {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  padding: 3.5rem 0;
+  
+  @media (min-width: 992px) {
+    grid-template-columns: 340px 1fr;
+    gap: 4.5rem;
+  }
+}
+
+.about-portrait-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-portrait {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid $emerald;
+  box-shadow: 0 0 0 6px $emerald-tint, 0 8px 30px -10px rgba(0, 0, 0, 0.12);
+  margin-bottom: 2rem;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+  
+  &:hover {
+    transform: scale(1.03) translateY(-4px);
+    box-shadow: 0 0 0 8px $emerald-tint, 0 12px 35px -8px rgba(11, 122, 82, 0.18);
+  }
+}
+
+.about-metadata-table {
+  width: 100%;
+  max-width: 320px;
+  font-family: $font-family-monospace;
+  font-size: 0.74rem;
+  border-collapse: collapse;
+  margin-bottom: 2.2rem;
+  border-top: 1px solid $rule;
+  border-bottom: 1px solid $rule;
+  
+  tr {
+    border-bottom: 1px dashed $rule;
+    &:last-child { border-bottom: none; }
+  }
+  
+  td {
+    padding: 0.65rem 0;
+    &:first-child {
+      color: $emerald;
+      font-weight: 500;
+      text-align: left;
+    }
+    &:last-child {
+      color: $ink-soft;
+      text-align: right;
+    }
+  }
+}
+
+.about-content-wrap {
+  max-width: 68ch;
+}
+
+.about-hero-title {
+  font-family: 'Newsreader', serif;
+  font-size: clamp(1.85rem, 4vw, 2.7rem);
+  line-height: 1.1;
+  letter-spacing: -0.018em;
+  margin-top: 0;
+  margin-bottom: 2.2rem;
+  color: $ink;
+  
+  em {
+    font-style: italic;
+    color: $emerald-deep;
+    font-weight: 400;
+  }
+}
+
+.about-body {
+  font-size: 1.1rem;
+  line-height: 1.68;
+  color: $ink-soft;
+  margin-bottom: 3.5rem;
+  
+  p {
+    margin-bottom: 1.4rem;
+    &:last-child { margin-bottom: 0; }
+  }
+  
+  b {
+    color: $ink;
+    font-weight: 500;
+  }
+}
+
+// Synthesis SVG Visual Graph (fig. 2)
+.about-synthesis-graph {
+  width: 100%;
+  max-width: 320px;
+  margin: 1.5rem auto 0;
+  border: 1px solid $rule;
+  border-radius: 8px;
+  padding: 1.5rem;
+  background: $paper-2;
+  box-shadow: 0 4px 12px -5px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  
+  .caption {
+    display: block;
+    margin-top: 0.8rem;
+    font-family: $font-family-monospace;
+    font-size: 0.65rem;
+    color: $ink-faint;
+    letter-spacing: 0.03em;
+  }
+  
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+  }
+  
+  .node-text {
+    font-family: $font-family-monospace;
+    font-size: 8px;
+    letter-spacing: 0.02em;
+    fill: $ink-soft;
+    text-anchor: middle;
+    font-weight: 500;
+    transition: fill 0.2s ease, font-weight 0.2s ease;
+  }
+  
+  .node-circle {
+    fill: $paper;
+    stroke: $emerald-line;
+    stroke-width: 1.2;
+    transition: all 0.3s ease;
+  }
+  
+  .node-group:hover {
+    .node-circle {
+      stroke: $emerald;
+      fill: $emerald-tint;
+      stroke-width: 1.8;
+    }
+    .node-text {
+      fill: $emerald-deep;
+      font-weight: 600;
+    }
+  }
+  
+  .core-node {
+    fill: $emerald;
+    stroke: $emerald-deep;
+    stroke-width: 1.5;
+    animation: corepulse 4s ease-in-out infinite;
+    transform-origin: 160px 135px;
+  }
+  
+  .connection-line {
+    stroke: $emerald-line;
+    stroke-width: 1;
+    stroke-dasharray: 4, 3;
+    animation: dashflow 18s linear infinite;
+  }
+}
+
+@keyframes corepulse {
+  0%, 100% { transform: scale(1); opacity: 0.95; }
+  50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 6px $emerald); }
+}
+
+@keyframes dashflow {
+  to { stroke-dashoffset: -40; }
+}
+
+// Editorial Journey Timeline
+.about-timeline-section {
+  border-top: 1px solid $rule;
+  padding-top: 3rem;
+  
+  h2 {
+    font-family: 'Newsreader', serif;
+    font-size: 1.75rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 2rem;
+  }
+}
+
+.editorial-timeline {
+  position: relative;
+  padding-left: 2rem;
+  border-left: 1.5px solid $emerald-line;
+  margin-left: 0.5rem;
+  
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    &:last-child { margin-bottom: 0; }
+  }
+  
+  .timeline-marker {
+    position: absolute;
+    left: calc(-2rem - 5px);
+    top: 6px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: $paper;
+    border: 2.2px solid $emerald;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  
+  .timeline-item:hover .timeline-marker {
+    background: $emerald;
+    box-shadow: 0 0 0 5px $emerald-tint;
+    transform: scale(1.3);
+  }
+  
+  .timeline-meta {
+    font-family: $font-family-monospace;
+    font-size: 0.72rem;
+    color: $emerald;
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  
+  .timeline-title {
+    font-family: 'Newsreader', serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: $ink;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.25;
+    
+    em {
+      font-style: italic;
+      color: $ink-soft;
+      font-weight: 400;
+      font-size: 0.95rem;
+      display: block;
+      margin-top: 0.1rem;
+      
+      @media (min-width: 576px) {
+        display: inline;
+        margin-top: 0;
+        &::before { content: " · "; }
+      }
+    }
+  }
+  
+  .timeline-desc {
+    font-size: 0.96rem;
+    color: $ink-soft;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+

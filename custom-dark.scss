@@ -52,3 +52,33 @@ div.quarto-post:hover {
 
 // Card/listing thumbnails already hidden; ensure scrollbar track is dark
 ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.04); }
+
+// About Page Dark-only refinements
+.about-synthesis-graph {
+  background: $paper-2;
+  box-shadow: 0 8px 24px -10px rgba(0, 0, 0, 0.5);
+  
+  .node-circle {
+    stroke: rgba(52, 192, 136, 0.25);
+  }
+  .node-group:hover {
+    .node-circle {
+      stroke: $emerald;
+      fill: rgba(52, 192, 136, 0.15);
+    }
+    .node-text {
+      fill: $emerald-deep;
+    }
+  }
+  .core-node {
+    stroke: $emerald-deep;
+  }
+  .connection-line {
+    stroke: rgba(52, 192, 136, 0.35);
+  }
+}
+
+.editorial-timeline {
+  border-left-color: rgba(52, 192, 136, 0.25);
+}
+
