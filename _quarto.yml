@@ -21,7 +21,12 @@ website:
   page-navigation: true
   back-to-top-navigation: true
   bread-crumbs: true
-  open-graph: true
+  open-graph:
+    image: assets/profile.jpg
+    locale: en_US
+    site-name: "Hygor X. Araújo"
+  twitter-card:
+    image: assets/profile.jpg
   cookie-consent:
     type: express
   google-analytics:
