@@ -1,7 +1,7 @@
 ---
 title: "Hygor X. Araújo"
 pagetitle: "Hygor X. Araújo — Data Science & ML Engineering"
-description-meta: "Writing on data science, ML engineering, and agentic workflows by Hygor X. Araújo."
+description: "Writing on data science, machine learning engineering, and agentic workflows by Hygor X. Araújo, a data scientist and systems engineer specializing in production-grade AI solutions."
 page-layout: full
 title-block-banner: false
 toc: false
