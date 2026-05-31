@@ -28,6 +28,11 @@ website:
     tracking-id: "G-FBHJ31L8R4"
     version: 4
   navbar:
+    logo: assets/profile.jpg
+    title: "Hygor X. Araújo"
+    left:
+      - text: Writing
+        href: index.html
     right:
       - about.qmd
       - icon: rss
@@ -37,11 +42,11 @@ format:
   html:
     theme:
       light: [zephyr, custom.scss]
-      dark: [darkly, custom.scss]
+      dark: [darkly, custom-dark.scss, custom.scss]
     toc: true
     code-line-numbers: true
     mermaid:
-      theme: dark
+      theme: neutral
 
 execute:
   enabled: true

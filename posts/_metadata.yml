@@ -7,7 +7,7 @@ freeze: true
 # Default image for listing
 image: "/assets/headers/default_header.svg"
 title-block-banner: "url(/assets/headers/default_header.svg)"
-title-block-banner-color: "#198754"
+title-block-banner-color: "#FAFAF7"
 
 author:
   - name: "Hygor X. Araújo"

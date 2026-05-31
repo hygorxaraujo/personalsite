@@ -1,0 +1,54 @@
+/*-- scss:defaults --*/
+
+// ─────────────────────────────────────────────────────────────
+// "Monograph" dark variant — refined emerald on warm charcoal.
+// Loaded AFTER custom.scss so these plain assignments win; the
+// shared rules in custom.scss reference these tokens and adapt.
+// (Quarto concatenates all defaults before all rules.)
+// ─────────────────────────────────────────────────────────────
+$paper:          #14161A;   // warm-charcoal "paper"
+$paper-2:        #1C1F24;   // raised surface
+$ink:            #E8E9E4;   // off-white text
+$ink-soft:       #A4A8A2;
+$ink-faint:      #6E7269;
+$emerald:        #34C088;   // brighter, readable on dark (not neon)
+$emerald-deep:   #6FE0AD;   // light enough to be link/hover colour on dark
+$emerald-tint:   rgba(52, 192, 136, 0.12);
+$emerald-line:   rgba(52, 192, 136, 0.30);
+$rule:           #2A2D31;
+
+// Re-map the Bootstrap/Quarto vars that custom.scss already
+// computed from the light tokens.
+$primary:        $emerald;
+$secondary:      $emerald-deep;
+$body-bg:        $paper;
+$body-color:     $ink;
+$link-color:     $emerald-deep;
+$link-hover-color: $emerald;
+$border-color:   $rule;
+$code-color:     $emerald-deep;
+
+$navbar-bg:          rgba(20, 22, 26, 0.85);
+$navbar-light-color: $ink-soft;
+$navbar-light-hover-color: $ink;
+$navbar-light-active-color: $emerald-deep;
+
+/*-- scss:rules --*/
+
+// Dark-only refinements
+.navbar { border-bottom: 1px solid $rule; }
+
+// Code: deepen the surface so it reads on charcoal
+.sourceCode pre, .cell-output-display pre {
+  background-color: rgba(52, 192, 136, 0.05) !important;
+  box-shadow: 0 4px 14px -8px rgba(0, 0, 0, 0.6);
+}
+code:not(.sourceCode) { background: rgba(52, 192, 136, 0.12); color: $emerald-deep; }
+
+// Listing hover wash a touch stronger to register on dark
+div.quarto-post:hover {
+  background: linear-gradient(90deg, rgba(52, 192, 136, 0.10), transparent 72%);
+}
+
+// Card/listing thumbnails already hidden; ensure scrollbar track is dark
+::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.04); }

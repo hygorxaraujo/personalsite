@@ -1,226 +1,313 @@
 /*-- scss:defaults --*/
 
-// Brand Palette: "The Neural Network"
-$brand-emerald: #198754;
-$brand-indigo: #1B1B3A;
-$brand-mint: #00FF87;
-$brand-slate: #0F172A;
-$brand-violet: #7C3AED;
+// ─────────────────────────────────────────────────────────────
+// Brand: "Monograph" — a personal journal on intelligent systems
+// One coherent emerald identity on warm paper. Light theme.
+// ─────────────────────────────────────────────────────────────
+$paper:          #FAFAF7;
+$paper-2:        #FFFFFF;
+$ink:            #13171A;
+$ink-soft:       #4E555A;
+$ink-faint:      #8B9196;
+$emerald:        #0B7A52;
+$emerald-deep:   #075037;
+$emerald-tint:   #E9F3EE;
+$emerald-line:   rgba(11, 122, 82, 0.22);
+$rule:           #E5E3DC;
 
-// Custom Colors
-$primary: $brand-emerald; // Emerald Green
-$secondary: $brand-indigo;
+// Bootstrap / Quarto colour mapping
+$primary:        $emerald;
+$secondary:      $emerald-deep;
+$body-bg:        $paper;
+$body-color:     $ink;
+$link-color:     $emerald-deep;
+$link-hover-color: $emerald;
+$border-color:   $rule;
+$code-color:     $emerald-deep;
 
-// Typography
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+// Typography — distinctive editorial pairing
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=Public+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap');
 
-$font-family-sans-serif: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-$headings-font-family: 'Space Grotesk', sans-serif;
-$font-family-monospace: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-sans-serif: 'Public Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$headings-font-family:   'Newsreader', Georgia, "Times New Roman", serif;
+$font-family-monospace:  'Space Mono', SFMono-Regular, Menlo, Consolas, monospace;
 
-// Font sizes
-$font-size-base: 1.05rem;
-$headings-font-weight: 600;
+$font-size-base:     1.0625rem;   // 17px
+$headings-font-weight: 500;
+$line-height-base:   1.62;
+$h1-font-size:       2.6rem;
+$h2-font-size:       1.85rem;
+
+// Navbar
+$navbar-bg:          rgba(250, 250, 247, 0.86);
+$navbar-light-color: $ink-soft;
+$navbar-light-hover-color: $ink;
+$navbar-light-active-color: $emerald-deep;
 
 /*-- scss:rules --*/
 
-// Avatar Styling (Migrated from styles.css)
-div.quarto-title-meta-author div.quarto-title-meta-contents p::before,
-div.quarto-title-meta > div:first-child div.quarto-title-meta-contents p::before {
-    content: "";
-    display: inline-block;
-    width: 2.5rem;
-    height: 2.5rem;
+// ── Global type rhythm ────────────────────────────────────────
+body {
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.003em;
+}
+h1, h2, h3, h4, .quarto-title h1 { letter-spacing: -0.015em; }
+h1 em, h2 em, h3 em { font-style: italic; color: $emerald-deep; }
 
-    /* Spacing adjustment */
-    margin-right: 0.75rem;
+a { text-decoration: none; }
+a:hover { text-decoration: none; }
 
-    /* Image Handling */
-    background-image: url('/assets/profile.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+// Monospace labels helper
+.mono { font-family: $font-family-monospace; }
 
-    /* Aesthetics */
-    border-radius: 50%;
-    border: 2px solid var(--bs-primary);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+// ── Navbar: portrait + name ───────────────────────────────────
+.navbar {
+  backdrop-filter: blur(9px);
+  border-bottom: 1px solid $rule;
+  min-height: 76px;
+}
+.navbar-brand {
+  font-family: 'Newsreader', serif;
+  font-weight: 500;
+  font-size: 1.28rem;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: $ink !important;
+}
+.navbar-brand .navbar-logo,
+.navbar-brand img {
+  width: 38px;
+  height: 38px;
+  max-height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid $emerald;
+  box-shadow: 0 0 0 3px $emerald-tint;
+  margin-right: 0;
+}
+.navbar .navbar-nav .nav-link {
+  font-family: $font-family-monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  position: relative;
+}
+.navbar .navbar-nav .nav-link::after {
+  content: "";
+  position: absolute; left: 0.5rem; right: 0.5rem; bottom: 0.35rem;
+  height: 1.5px; width: 0; background: $emerald; transition: width 0.25s ease;
+}
+.navbar .navbar-nav .nav-link:hover::after { width: calc(100% - 1rem); }
 
-    /* Vertical Alignment fixes */
-    flex-shrink: 0; /* Prevent avatar from shrinking */
+// ── Homepage hero (raw HTML in index.qmd) ─────────────────────
+// Suppress the default Quarto title block ONLY on the home page.
+body:has(.mono-hero) #title-block-header { display: none; }
+body:has(.mono-hero) .quarto-title-banner { display: none; }
+
+.mono-hero {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.5rem;
+  align-items: center;
+  padding: 3.4rem 0 3rem;
+  border-bottom: 1px solid $rule;
+  margin-bottom: 1rem;
+}
+@media (max-width: 880px) {
+  .mono-hero { grid-template-columns: 1fr; gap: 1.5rem; }
+  .mono-hero .graph-wrap { order: -1; max-width: 420px; }
+}
+.mono-hero .eyebrow {
+  font-family: $font-family-monospace;
+  font-size: 0.75rem; letter-spacing: 0.13em; text-transform: uppercase;
+  color: $emerald; margin-bottom: 1.3rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.mono-hero .eyebrow::before { content: ""; width: 32px; height: 1px; background: $emerald; }
+.mono-hero h1 {
+  font-family: 'Newsreader', serif; font-weight: 500;
+  font-size: clamp(2.5rem, 5.6vw, 4.1rem); line-height: 1.05;
+  letter-spacing: -0.018em; max-width: 14ch; margin: 0;
+}
+.mono-hero h1 em { font-style: italic; color: $emerald-deep; }
+.mono-hero .lede {
+  margin-top: 1.6rem; max-width: 50ch; font-size: 1.15rem;
+  color: $ink-soft; line-height: 1.6;
+}
+.mono-hero .lede b { color: $ink; font-weight: 500; }
+.mono-hero .meta {
+  margin-top: 2rem; display: flex; gap: 1.6rem; flex-wrap: wrap;
+  font-family: $font-family-monospace; font-size: 0.72rem;
+  letter-spacing: 0.03em; color: $ink-faint;
+}
+.mono-hero .meta b {
+  font-family: 'Newsreader', serif; font-size: 1.25rem; color: $ink;
+  font-weight: 500; display: block; margin-bottom: 1px; letter-spacing: -0.01em;
+}
+.mono-hero .social {
+  margin-top: 1.85rem; display: flex; gap: 1.1rem;
+  font-family: $font-family-monospace; font-size: 0.75rem; color: $ink-soft;
+}
+.mono-hero .social a {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  border-bottom: 1px solid transparent; transition: 0.2s;
+}
+.mono-hero .social a:hover { color: $emerald-deep; border-color: $emerald-line; }
+
+.mono-hero .graph-wrap { position: relative; }
+.mono-hero .graph-wrap .cap {
+  position: absolute; bottom: -6px; right: 4px;
+  font-family: $font-family-monospace; font-size: 0.66rem;
+  color: $ink-faint; letter-spacing: 0.04em;
+}
+.mono-hero .graph svg { width: 100%; height: auto; display: block; overflow: visible; }
+.mono-hero .graph .node { fill: $paper; stroke: $emerald; stroke-width: 1.5; }
+.mono-hero .graph .node.hot { fill: $emerald; }
+.mono-hero .graph .edge { stroke: $emerald-line; stroke-width: 1.2; fill: none; }
+.mono-hero .graph .pulse { transform-origin: center; animation: nodepulse 3s ease-in-out infinite; }
+@keyframes nodepulse { 0%, 100% { r: 6px; } 50% { r: 9px; } }
+
+// ── Listing: journal index rows ───────────────────────────────
+.quarto-listing { margin-top: 0.5rem; }
+.quarto-listing-default .list { counter-reset: post; }
+
+div.quarto-post {
+  counter-increment: post;
+  display: grid;
+  grid-template-columns: 46px 1fr 120px;
+  column-gap: 1.5rem;
+  align-items: baseline;
+  padding: 1.85rem 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  border-bottom: 1px solid $rule !important;
+  border-radius: 0 !important;
+  transition: padding 0.18s ease, background 0.18s ease;
+}
+div.quarto-post:hover {
+  background: linear-gradient(90deg, $emerald-tint, transparent 72%);
+  padding-left: 10px !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+// Hide thumbnails on the index — clean text rows
+div.quarto-post .thumbnail { display: none !important; }
+// Leading index number [01]
+div.quarto-post .body::before {
+  content: "[" counter(post, decimal-leading-zero) "]";
+  grid-column: 1;
+  font-family: $font-family-monospace;
+  font-size: 0.78rem; color: $emerald;
+}
+div.quarto-post .body {
+  display: contents;   // let title/date participate in the row grid
+}
+div.quarto-post .listing-title,
+div.quarto-post h3.listing-title {
+  grid-column: 2;
+  font-family: 'Newsreader', serif; font-weight: 500;
+  font-size: 1.55rem; line-height: 1.15; letter-spacing: -0.012em;
+  margin: 0; transition: color 0.2s ease;
+}
+div.quarto-post:hover .listing-title { color: $emerald-deep; }
+div.quarto-post .listing-subtitle { display: none; }
+div.quarto-post .listing-categories {
+  grid-column: 2; padding: 0 !important; margin-top: 0.7rem;
+  display: flex; gap: 0.45rem; flex-wrap: wrap;
+}
+div.quarto-post .listing-category {
+  font-family: $font-family-monospace; font-size: 0.68rem;
+  color: $ink-soft; border: 1px solid $rule; border-radius: 3px;
+  padding: 2px 9px; background: $paper-2;
+  text-transform: none; letter-spacing: 0; transition: 0.2s;
+}
+div.quarto-post:hover .listing-category { border-color: $emerald-line; color: $emerald-deep; }
+div.quarto-post .metadata,
+div.quarto-post .listing-date {
+  grid-column: 3; grid-row: 1;
+  font-family: $font-family-monospace; font-size: 0.74rem;
+  color: $ink-soft; text-align: right;
+}
+@media (max-width: 680px) {
+  div.quarto-post { grid-template-columns: 1fr; }
+  div.quarto-post .metadata, div.quarto-post .listing-date { text-align: left; grid-column: 1; }
 }
 
-/* Flex layout to align avatar and text */
-div.quarto-title-meta-author div.quarto-title-meta-contents p,
-div.quarto-title-meta > div:first-child div.quarto-title-meta-contents p {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0;
-    line-height: 2.5rem; /* Match avatar height for perfect centering */
+// Section heading above the listing
+.listing-section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  border-bottom: 1.5px solid $ink; padding-bottom: 0.8rem; margin: 2rem 0 0;
+}
+.listing-section-head h2 {
+  font-family: 'Newsreader', serif; font-weight: 500; font-size: 1.7rem;
+  letter-spacing: -0.01em; margin: 0;
+}
+.listing-section-head span {
+  font-family: $font-family-monospace; font-size: 0.72rem;
+  letter-spacing: 0.08em; text-transform: uppercase; color: $ink-faint;
 }
 
-// Custom technical details
-.code-copy-button {
-    border: none !important;
-    background-color: transparent !important;
-    opacity: 0.5;
-    transition: opacity 0.2s ease-in-out;
+// ── Post pages ────────────────────────────────────────────────
+#quarto-document-content .quarto-title h1.title,
+.quarto-title-block .quarto-title h1 {
+  font-family: 'Newsreader', serif; font-weight: 600;
+  letter-spacing: -0.02em; line-height: 1.08;
 }
-
-.code-copy-button:hover {
-    opacity: 1;
-}
-
-// Hero banner styling
 .quarto-title-banner {
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
+  background-size: cover !important; background-position: center !important;
 }
 
-.hero-banner {
-    padding: 4rem 2rem;
-    margin-bottom: 3rem;
-    border-radius: 1rem;
-    background: rgba(var(--bs-primary-rgb), 0.05);
-    border: 1px solid rgba(var(--bs-primary-rgb), 0.1);
-    text-align: center;
-
-    h1 {
-        font-family: 'Space Grotesk', sans-serif;
-        font-weight: 700;
-        margin-bottom: 1rem;
-    }
-
-    h3 {
-        font-weight: 400;
-        opacity: 0.8;
-    }
+// Author avatar in post meta
+div.quarto-title-meta-author div.quarto-title-meta-contents p::before {
+  content: ""; display: inline-block; width: 2.3rem; height: 2.3rem;
+  margin-right: 0.7rem;
+  background-image: url('/assets/profile.jpg'); background-size: cover;
+  background-position: center; border-radius: 50%;
+  border: 1.5px solid $emerald; box-shadow: 0 0 0 3px $emerald-tint;
+  flex-shrink: 0;
+}
+div.quarto-title-meta-author div.quarto-title-meta-contents p {
+  display: flex; align-items: center; margin-bottom: 0; line-height: 2.3rem;
 }
 
-// Listing card hover effects
-.quarto-post {
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    border-radius: 0.75rem !important;
-    overflow: hidden;
-    padding: 0 !important;
-    margin-bottom: 2rem;
-    border: 1px solid rgba(var(--bs-primary-rgb), 0.1) !important;
+// ── Code blocks ───────────────────────────────────────────────
+.sourceCode pre, .cell-output-display pre {
+  border: 1px solid $emerald-line !important;
+  border-radius: 0.5rem !important;
+  background-color: rgba(11, 122, 82, 0.025) !important;
+  box-shadow: 0 4px 10px -6px rgba(0, 0, 0, 0.08);
+}
+code:not(.sourceCode) { color: $emerald-deep; background: $emerald-tint; padding: 0.1em 0.35em; border-radius: 3px; }
+.code-copy-button { border: none !important; background: transparent !important; opacity: 0.5; transition: opacity 0.2s; }
+.code-copy-button:hover { opacity: 1; }
 
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        border-color: rgba(var(--bs-primary-rgb), 0.3) !important;
-    }
+// ── TOC ───────────────────────────────────────────────────────
+#TOC, .toc-active {
+  font-family: $font-family-monospace; font-size: 0.78rem;
+}
+.sidebar nav[role="doc-toc"] ul > li > a.active,
+.sidebar nav[role="doc-toc"] ul > li > a:hover { color: $emerald-deep !important; border-left-color: $emerald !important; }
 
-    .thumbnail {
-        border-bottom: 1px solid rgba(var(--bs-primary-rgb), 0.1);
-    }
+// ── Scrollbar ─────────────────────────────────────────────────
+::-webkit-scrollbar { width: 9px; }
+::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.04); }
+::-webkit-scrollbar-thumb { background: $emerald; border-radius: 5px; border: 2px solid transparent; background-clip: padding-box; }
 
-    .listing-categories {
-        padding: 0 1rem;
-    }
-
-    .body {
-        padding: 1.5rem;
-    }
+// ── Footer ────────────────────────────────────────────────────
+.nav-footer {
+  border-top: 1px solid $rule;
+  font-family: $font-family-monospace; font-size: 0.72rem;
+  letter-spacing: 0.03em; color: $ink-soft;
 }
 
-// Code block improvements
-.cell-output-display pre, .sourceCode pre {
-    border: 1px solid rgba(var(--bs-primary-rgb), 0.2) !important;
-    border-radius: 0.5rem !important;
-    background-color: rgba(var(--bs-primary-rgb), 0.02) !important;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-
-// Custom scrollbar
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(0,0,0,0.05);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--bs-primary);
-    border-radius: 5px;
-    border: 2px solid transparent;
-    background-clip: padding-box;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--bs-primary);
-}
-
-// Subtle grid pattern for header
-#quarto-header {
-    background-image: 
-        linear-gradient(rgba(var(--bs-primary-rgb), 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(var(--bs-primary-rgb), 0.03) 1px, transparent 1px);
-    background-size: 20px 20px;
-}
-
-// Mermaid Diagram Improvements
-.mermaid {
-    background: transparent !important;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    overflow: hidden;
-
-    // Target specifically within the SVG to avoid leaking styles to text
-    svg {
-        text, tspan {
-            fill: var(--quarto-body-color) !important;
-        }
-
-        .node rect, .node circle, .node ellipse, .node polygon, .node path {
-            fill: rgba(var(--bs-primary-rgb), 0.1) !important;
-            stroke: var(--bs-primary) !important;
-            stroke-width: 1px !important;
-        }
-
-        .edgePath .path {
-            stroke: var(--bs-primary) !important;
-            stroke-width: 1.5px !important;
-        }
-
-        .cluster rect {
-            fill: rgba(var(--bs-primary-rgb), 0.05) !important;
-            stroke: rgba(var(--bs-primary-rgb), 0.2) !important;
-            stroke-dasharray: 5, 5 !important;
-        }
-
-        .label, .labelText, .loopText, .noteText, .messageText, .actor {
-            color: var(--quarto-body-color) !important;
-            fill: var(--quarto-body-color) !important;
-        }
-    }
-}
-
-// Sequence diagram specific fixes
-.mermaid .actor {
-    fill: rgba(var(--bs-primary-rgb), 0.1) !important;
-    stroke: var(--bs-primary) !important;
-}
-
-// Ensure Mermaid text is legible in dark mode specifically
-body.quarto-dark {
-    .mermaid svg {
-        text, tspan, .label, .messageText, .actor-man, .labelText, .loopText, .noteText, .actor {
-            fill: #e9ecef !important;
-            color: #e9ecef !important;
-        }
-        
-        // Fix markers (arrows) in dark mode
-        marker {
-            fill: #e9ecef !important;
-            stroke: #e9ecef !important;
-        }
-
-        .cluster rect {
-            fill: rgba(255, 255, 255, 0.02) !important;
-        }
-    }
+// ── Mermaid (kept, re-tinted to emerald) ──────────────────────
+.mermaid { background: transparent !important; padding: 1rem; }
+.mermaid svg {
+  text, tspan { fill: $ink !important; }
+  .node rect, .node circle, .node ellipse, .node polygon, .node path {
+    fill: rgba(11, 122, 82, 0.08) !important; stroke: $emerald !important; stroke-width: 1px !important;
+  }
+  .edgePath .path { stroke: $emerald !important; stroke-width: 1.5px !important; }
+  .cluster rect { fill: rgba(11, 122, 82, 0.04) !important; stroke: $emerald-line !important; stroke-dasharray: 5, 5 !important; }
 }

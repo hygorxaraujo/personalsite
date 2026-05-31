@@ -1,19 +1,72 @@
 ---
-title: "hygorxaraujo"
+title: "Hygor X. Araújo"
+pagetitle: "Hygor X. Araújo — Intelligent Systems Engineer"
+description-meta: "Writing on data science, ML engineering, and agentic workflows by Hygor X. Araújo, an intelligent-systems engineer."
+page-layout: full
+title-block-banner: false
+toc: false
 listing:
+  id: writing
   contents: posts
   sort: "date desc"
-  type: grid
-  categories: true
+  type: default
+  categories: false
   sort-ui: false
   filter-ui: false
+  fields: [title, categories, date]
   feed: true
-  image-height: 200px
-page-layout: full
-title-block-banner: true
 ---
 
-::: {.hero-banner}
-# Data Science & ML Engineering
-### Thoughts on Data Science, AI & Machine Learning Engineering, and the future of Agentic Workflows.
+```{=html}
+<section class="mono-hero">
+  <div>
+    <div class="eyebrow">Hi, I'm Hygor — Intelligent Systems Engineer</div>
+    <h1>I build machines that <em>learn &amp; reason</em>, and write about how.</h1>
+    <p class="lede">I'm a data scientist and intelligent-systems engineer with a researcher's bias for first principles. Here I write about <b>data science, ML engineering, and agentic workflows</b> — white-box over black-box, the math and data flow always made explicit.</p>
+    <div class="meta">
+      <div><b>7+ yrs</b>data &amp; software systems</div>
+      <div><b>MSc</b>Computational Intelligence</div>
+      <div><b>MBA</b>AI &amp; Big Data · USP</div>
+    </div>
+    <div class="social">
+      <a href="https://linkedin.com/in/hygorxaraujo">↗ LinkedIn</a>
+      <a href="https://github.com/hygorxaraujo">↗ GitHub</a>
+      <a href="mailto:contact@hygorxaraujo.com">✉ E-mail</a>
+    </div>
+  </div>
+  <div class="graph-wrap">
+    <div class="graph">
+      <svg viewBox="0 0 380 320" aria-hidden="true">
+        <g class="edges">
+          <path class="edge" d="M190 160 L90 70"/><path class="edge" d="M190 160 L300 90"/>
+          <path class="edge" d="M190 160 L70 230"/><path class="edge" d="M190 160 L310 240"/>
+          <path class="edge" d="M190 160 L185 40"/><path class="edge" d="M190 160 L200 290"/>
+          <path class="edge" d="M90 70 L185 40"/><path class="edge" d="M300 90 L185 40"/>
+          <path class="edge" d="M70 230 L200 290"/><path class="edge" d="M310 240 L200 290"/>
+          <path class="edge" d="M90 70 L70 230"/><path class="edge" d="M300 90 L310 240"/>
+          <path class="edge" d="M300 90 L250 165"/><path class="edge" d="M190 160 L250 165"/>
+          <path class="edge" d="M90 70 L130 150"/><path class="edge" d="M190 160 L130 150"/>
+        </g>
+        <circle class="node" cx="185" cy="40" r="5"/>
+        <circle class="node" cx="90" cy="70" r="6"/>
+        <circle class="node" cx="300" cy="90" r="6"/>
+        <circle class="node" cx="70" cy="230" r="5"/>
+        <circle class="node" cx="310" cy="240" r="6"/>
+        <circle class="node" cx="200" cy="290" r="5"/>
+        <circle class="node" cx="250" cy="165" r="4"/>
+        <circle class="node" cx="130" cy="150" r="4"/>
+        <circle class="node hot pulse" cx="190" cy="160" r="9"/>
+      </svg>
+    </div>
+    <span class="cap">fig. 1 — knowledge propagation</span>
+  </div>
+</section>
+
+<div class="listing-section-head">
+  <h2>Writing</h2>
+  <span>Selected · 2018—2026</span>
+</div>
+```
+
+::: {#writing}
 :::
