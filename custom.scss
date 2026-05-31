@@ -46,6 +46,21 @@ $navbar-light-active-color: $emerald-deep;
 
 /*-- scss:rules --*/
 
+:root {
+  --gradient-glow-start: #0B7A52;
+  --gradient-glow-end: #FAFAF7;
+  --node-systems-start: #FAFAF7;
+  --node-systems-end: rgba(11, 122, 82, 0.03);
+  --node-research-start: #FAFAF7;
+  --node-research-end: rgba(11, 122, 82, 0.03);
+  --node-ai-start: #FAFAF7;
+  --node-ai-end: rgba(11, 122, 82, 0.03);
+  --svg-text-color: #4E555A;
+  --svg-text-active: #075037;
+  --svg-line-color: rgba(11, 122, 82, 0.12);
+  --emerald-gradient-glow: #0B7A52;
+}
+
 // ── Global type rhythm ────────────────────────────────────────
 body {
   -webkit-font-smoothing: antialiased;
@@ -376,7 +391,7 @@ body:has(.about-custom) .quarto-title-banner { display: none; }
     }
     
     td {
-      padding: 0.65rem 0 !important;
+      padding: 0.65rem 0.75rem !important;
       &:first-child {
         color: $emerald !important;
         font-weight: 500 !important;
@@ -481,33 +496,107 @@ body:has(.about-custom) .quarto-title-banner { display: none; }
     overflow: visible;
   }
   
+  // Technical background grid
+  .tech-grid {
+    opacity: 0.85;
+    
+    .grid-ring {
+      stroke: $rule;
+      stroke-width: 0.8;
+      
+      &.dashed {
+        stroke-dasharray: 3, 4;
+      }
+    }
+    
+    .grid-axis {
+      stroke: rgba(0, 0, 0, 0.02);
+      stroke-width: 0.8;
+      stroke-dasharray: 2, 8;
+    }
+  }
+  
+  // Connections between nodes
+  .connections {
+    .hub-line-track {
+      stroke: var(--svg-line-color, rgba(11, 122, 82, 0.08));
+      stroke-width: 1.5;
+      transition: stroke 0.3s ease;
+    }
+    
+    .hub-line {
+      stroke: var(--svg-line-color, rgba(11, 122, 82, 0.12));
+      stroke-width: 1;
+      stroke-dasharray: 3, 3;
+      transition: stroke 0.3s ease;
+    }
+  }
+  
+  // Moving particle flow
+  .flow-particle {
+    fill: $emerald;
+    filter: drop-shadow(0 0 3px $emerald);
+    opacity: 0.7;
+  }
+  
+  // Outer dashed rings on nodes that rotate
+  .node-outer-ring {
+    fill: none;
+    stroke: var(--svg-line-color, rgba(11, 122, 82, 0.15));
+    stroke-width: 0.8;
+    stroke-dasharray: 4, 5;
+    transition: stroke 0.3s ease, stroke-width 0.3s ease;
+  }
+  
+  // Rotating animations
+  .rotating-ring {
+    animation: rotating-ring-anim 25s linear infinite;
+  }
+  
+  .ring-systems { transform-origin: 80px 170px; }
+  .ring-research { transform-origin: 240px 170px; }
+  .ring-ai { transform-origin: 160px 75px; }
+  
   .node-text {
     font-family: $font-family-monospace;
-    font-size: 8px;
+    font-size: 7.5px;
     letter-spacing: 0.02em;
-    fill: $ink-soft;
+    fill: var(--svg-text-color, $ink-soft);
     text-anchor: middle;
     font-weight: 500;
     transition: fill 0.2s ease, font-weight 0.2s ease;
   }
   
   .node-circle {
-    fill: $paper;
-    stroke: $emerald-line;
+    stroke: var(--svg-line-color, rgba(11, 122, 82, 0.18));
     stroke-width: 1.2;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
   
-  .node-group:hover {
-    .node-circle {
-      stroke: $emerald;
-      fill: $emerald-tint;
-      stroke-width: 1.8;
+  // Node hover states
+  .node-group {
+    cursor: pointer;
+    
+    &:hover {
+      .node-circle {
+        stroke: $emerald;
+        stroke-width: 1.8;
+        transform: scale(1.04);
+      }
+      .node-outer-ring {
+        stroke: $emerald;
+        stroke-width: 1.2;
+      }
+      .node-text {
+        fill: var(--svg-text-active, $emerald-deep);
+        font-weight: 600;
+      }
     }
-    .node-text {
-      fill: $emerald-deep;
-      font-weight: 600;
-    }
+  }
+  
+  // Origin transformations
+  .node-circle {
+    transform-origin: center;
   }
   
   .core-node {
@@ -517,22 +606,16 @@ body:has(.about-custom) .quarto-title-banner { display: none; }
     animation: corepulse 4s ease-in-out infinite;
     transform-origin: 160px 135px;
   }
-  
-  .connection-line {
-    stroke: $emerald-line;
-    stroke-width: 1;
-    stroke-dasharray: 4, 3;
-    animation: dashflow 18s linear infinite;
-  }
+}
+
+@keyframes rotating-ring-anim {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @keyframes corepulse {
   0%, 100% { transform: scale(1); opacity: 0.95; }
   50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 6px $emerald); }
-}
-
-@keyframes dashflow {
-  to { stroke-dashoffset: -40; }
 }
 
 // Editorial Journey Timeline

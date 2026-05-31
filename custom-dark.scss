@@ -35,6 +35,21 @@ $navbar-light-active-color: $emerald-deep;
 
 /*-- scss:rules --*/
 
+:root {
+  --gradient-glow-start: #34C088;
+  --gradient-glow-end: #14161A;
+  --node-systems-start: #1C1F24;
+  --node-systems-end: rgba(52, 192, 136, 0.06);
+  --node-research-start: #1C1F24;
+  --node-research-end: rgba(52, 192, 136, 0.06);
+  --node-ai-start: #1C1F24;
+  --node-ai-end: rgba(52, 192, 136, 0.06);
+  --svg-text-color: #A4A8A2;
+  --svg-text-active: #6FE0AD;
+  --svg-line-color: rgba(52, 192, 136, 0.22);
+  --emerald-gradient-glow: #34C088;
+}
+
 // Dark-only refinements
 .navbar { border-bottom: 1px solid $rule; }
 
@@ -58,23 +73,13 @@ div.quarto-post:hover {
   background: $paper-2;
   box-shadow: 0 8px 24px -10px rgba(0, 0, 0, 0.5);
   
-  .node-circle {
-    stroke: rgba(52, 192, 136, 0.25);
-  }
-  .node-group:hover {
-    .node-circle {
-      stroke: $emerald;
-      fill: rgba(52, 192, 136, 0.15);
+  .tech-grid {
+    .grid-ring {
+      stroke: $rule;
     }
-    .node-text {
-      fill: $emerald-deep;
+    .grid-axis {
+      stroke: rgba(255, 255, 255, 0.015);
     }
-  }
-  .core-node {
-    stroke: $emerald-deep;
-  }
-  .connection-line {
-    stroke: rgba(52, 192, 136, 0.35);
   }
 }
 

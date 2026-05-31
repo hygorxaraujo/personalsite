@@ -9,13 +9,13 @@ toc: false
 ```{=html}
 <div class="about-custom-wrapper">
   <div class="about-custom">
-    <aside class="about-portrait-wrap">
+    <div class="about-portrait-wrap">
       <img src="assets/profile.jpg" class="about-portrait" alt="Hygor X. Araújo" />
       
       <table class="about-metadata-table table">
         <tr>
           <td>Location</td>
-          <td>São Paulo, Brazil</td>
+          <td>Brazil</td>
         </tr>
         <tr>
           <td>Domain</td>
@@ -39,39 +39,102 @@ toc: false
       
       <div class="about-synthesis-graph">
         <svg viewBox="0 0 320 250" aria-hidden="true">
-          <!-- Flowing connections -->
-          <g>
-            <path class="connection-line" d="M 80,170 Q 160,80 240,170" fill="none" />
-            <path class="connection-line" d="M 80,170 Q 160,210 240,170" fill="none" />
-            <path class="connection-line" d="M 160,90 L 160,170" fill="none" />
+          <defs>
+            <!-- Background Radial Glow -->
+            <radialGradient id="bg-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="var(--gradient-glow-start)" stop-opacity="0.15" />
+              <stop offset="100%" stop-color="var(--gradient-glow-end)" stop-opacity="0" />
+            </radialGradient>
+            
+            <!-- Node Gradients -->
+            <linearGradient id="node-grad-systems" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--node-systems-start)" />
+              <stop offset="100%" stop-color="var(--node-systems-end)" />
+            </linearGradient>
+            <linearGradient id="node-grad-research" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--node-research-start)" />
+              <stop offset="100%" stop-color="var(--node-research-end)" />
+            </linearGradient>
+            <linearGradient id="node-grad-ai" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--node-ai-start)" />
+              <stop offset="100%" stop-color="var(--node-ai-end)" />
+            </linearGradient>
+            
+            <!-- Center Core Glow -->
+            <radialGradient id="core-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="var(--emerald-gradient-glow, #0B7A52)" stop-opacity="1" />
+              <stop offset="40%" stop-color="var(--emerald-gradient-glow, #0B7A52)" stop-opacity="0.3" />
+              <stop offset="100%" stop-color="var(--emerald-gradient-glow, #0B7A52)" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+
+          <!-- Ambient Glow Background -->
+          <circle cx="160" cy="135" r="120" fill="url(#bg-glow)" />
+
+          <!-- Background Technical Grid & Orbits -->
+          <g class="tech-grid">
+            <circle cx="160" cy="135" r="110" fill="none" class="grid-ring" />
+            <circle cx="160" cy="135" r="60" fill="none" class="grid-ring dashed" />
+            <line x1="160" y1="15" x2="160" y2="255" class="grid-axis" />
+            <line x1="20" y1="135" x2="300" y2="135" class="grid-axis" />
           </g>
-          
-          <!-- Core Synthesis Node -->
-          <g>
-            <circle class="core-node" cx="160" cy="135" r="7" />
+
+          <!-- Connection Paths -->
+          <g class="connections">
+            <!-- Core Hub Lines -->
+            <line x1="80" y1="170" x2="160" y2="135" class="hub-line-track" />
+            <line x1="80" y1="170" x2="160" y2="135" class="hub-line" />
+            
+            <line x1="240" y1="170" x2="160" y2="135" class="hub-line-track" />
+            <line x1="240" y1="170" x2="160" y2="135" class="hub-line" />
+            
+            <line x1="160" y1="75" x2="160" y2="135" class="hub-line-track" />
+            <line x1="160" y1="75" x2="160" y2="135" class="hub-line" />
           </g>
-          
-          <!-- Systems Architecture Node -->
+
+          <!-- Flowing Data Particles -->
+          <g class="particles">
+            <circle r="3" class="flow-particle">
+              <animateMotion dur="3.4s" repeatCount="indefinite" path="M 80,170 L 160,135" />
+            </circle>
+            <circle r="3" class="flow-particle">
+              <animateMotion dur="3.4s" repeatCount="indefinite" path="M 240,170 L 160,135" />
+            </circle>
+            <circle r="3" class="flow-particle">
+              <animateMotion dur="3.4s" repeatCount="indefinite" path="M 160,75 L 160,135" />
+            </circle>
+          </g>
+
+          <!-- Core Hub Node (Synthesis) -->
+          <g class="core-hub-group">
+            <circle cx="160" cy="135" r="22" fill="url(#core-glow)" />
+            <circle class="core-node" cx="160" cy="135" r="6" />
+          </g>
+
+          <!-- SYSTEMS Node -->
           <g class="node-group">
-            <circle class="node-circle" cx="80" cy="170" r="32" />
+            <circle class="node-outer-ring ring-systems rotating-ring" cx="80" cy="170" r="36" />
+            <circle class="node-circle" cx="80" cy="170" r="30" fill="url(#node-grad-systems)" />
             <text class="node-text" x="80" y="173">SYSTEMS</text>
           </g>
-          
-          <!-- ML Research Node -->
+
+          <!-- RESEARCH Node -->
           <g class="node-group">
-            <circle class="node-circle" cx="240" cy="170" r="32" />
+            <circle class="node-outer-ring ring-research rotating-ring" cx="240" cy="170" r="36" />
+            <circle class="node-circle" cx="240" cy="170" r="30" fill="url(#node-grad-research)" />
             <text class="node-text" x="240" y="173">RESEARCH</text>
           </g>
-          
-          <!-- Applied AI Node -->
+
+          <!-- APPLIED AI Node -->
           <g class="node-group">
-            <circle class="node-circle" cx="160" cy="90" r="32" />
-            <text class="node-text" x="160" y="93">APPLIED AI</text>
+            <circle class="node-outer-ring ring-ai rotating-ring" cx="160" cy="75" r="36" />
+            <circle class="node-circle" cx="160" cy="75" r="30" fill="url(#node-grad-ai)" />
+            <text class="node-text" x="160" y="78">APPLIED AI</text>
           </g>
         </svg>
         <span class="caption">fig. 2 — architectural synthesis</span>
       </div>
-    </aside>
+    </div>
     
     <main class="about-content-wrap">
       <h1 class="about-hero-title">
