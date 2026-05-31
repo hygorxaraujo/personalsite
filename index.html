@@ -2,13 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Writing on data science, machine learning engineering, and agentic workflows by Hygor X. Araújo, a data scientist and systems engineer specializing in production-grade AI solutions.">
 
-<title>hygorxaraujo</title>
+<title>Hygor X. Araújo — Data Science &amp; ML Engineering – hygorxaraujo</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -30,6 +34,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./assets/favicon.ico" rel="icon">
 <script src="site_libs/quarto-listing/list.min.js"></script>
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/cookie-consent/cookie-consent.js"></script>
@@ -40,14 +45,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-748b535e376f14d4692bf2b2e5fd6380.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a07183d3e397355e670fc717ada12dd0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a5f2ff12af11f1b9d8d7667aa8fb8bf9.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a07183d3e397355e670fc717ada12dd0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ab5f6965b9442f1662ce4b78cc6f4ef1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-f4dfbb687ec2d06740e380d35ecef104.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-ab5f6965b9442f1662ce4b78cc6f4ef1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-37b967002985f83436846c62887a9e57.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c3f27c8ffbef73149d099f7e49a7ccdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-37b967002985f83436846c62887a9e57.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -78,20 +83,20 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    const listingTargetEl = window.document.querySelector('#listing-writing .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-categories','listing-date',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+    window['quarto-listings']['listing-writing'] = new List('listing-writing', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -117,9 +122,9 @@ gtag('config', 'G-FBHJ31L8R4', { 'anonymize_ip': true});
 <script type="text/javascript" charset="UTF-8">
 document.addEventListener('DOMContentLoaded', function () {
 cookieconsent.run({
-  "notice_banner_type":"headline",
+  "notice_banner_type":"simple",
   "consent_type":"express",
-  "palette":"dark",
+  "palette":"light",
   "language":"en",
   "page_load_consent_levels":["strictly-necessary"],
   "notice_banner_reject_button_hide":false,
@@ -133,7 +138,7 @@ cookieconsent.run({
   
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -146,7 +151,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -162,9 +167,15 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
-<link rel="alternate" type="application/rss+xml" title="hygorxaraujo" href="index.xml" data-external="1"><meta property="og:title" content="hygorxaraujo">
+<link rel="alternate" type="application/rss+xml" title="hygorxaraujo" href="index.xml" data-external="1"><meta property="og:title" content="Hygor X. Araújo — Data Science &amp; ML Engineering">
+<meta property="og:description" content="Writing on data science, machine learning engineering, and agentic workflows by Hygor X. Araújo, a data scientist and systems engineer specializing in production-grade AI solutions.">
+<meta property="og:image" content="https://hygorxaraujo.com/assets/profile.jpg">
 <meta property="og:site_name" content="hygorxaraujo">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:title" content="Hygor X. Araújo — Data Science &amp; ML Engineering">
+<meta name="twitter:description" content="Writing on data science, machine learning engineering, and agentic workflows by Hygor X. Araújo, a data scientist and systems engineer specializing in production-grade AI solutions.">
+<meta name="twitter:image" content="https://hygorxaraujo.com/assets/profile.jpg">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -321,6 +332,7 @@ window.Quarto = {
       toggleColorMode(toAlternate);
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
     };
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
@@ -331,12 +343,16 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./assets/profile.jpg" alt="" class="navbar-logo light-content">
+    <img src="./assets/profile.jpg" alt="" class="navbar-logo dark-content">
+    </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">hygorxaraujo</span>
+    <span class="navbar-title">Hygor X. Araújo</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -344,6 +360,12 @@ window.Quarto = {
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Writing</span></a>
+  </li>  
+</ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
@@ -358,53 +380,99 @@ window.Quarto = {
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">hygorxaraujo</h1>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta column-page-left">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Y3VkYQ==">cuda <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWF0cGxvdGxpYg==">matplotlib <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bnVtcHk=">numpy <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cGFuZGFz">pandas <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJvZHVjdGl2aXR5">productivity <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHl0aG9u">python <span class="quarto-category-count">(3)</span></div><div class="category" data-category="dGVuc29yZmxvdw==">tensorflow <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content">
 
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Hygor X. Araújo</h1>
+</div>
+
+<div>
+  <div class="description">
+    Writing on data science, machine learning engineering, and agentic workflows by Hygor X. Araújo, a data scientist and systems engineer specializing in production-grade AI solutions.
+  </div>
+</div>
 
 
+<div class="quarto-title-meta column-page">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
 
 
+<section class="mono-hero">
+  <div>
+    <div class="eyebrow">Hi, I'm Hygor — Data Science &amp; ML Engineering</div>
+    <h1>Data, <em>Models</em>, Agents and <em>Intelligent Systems</em>, bringing them to the real world.</h1>
+    <p class="lede">I'm a data scientist and intelligent-systems engineer. Here I write about <b>data science, ML engineering, and agentic workflows</b>.</p>
+    <div class="meta">
+      <div><b>8+ yrs</b>data &amp; software systems</div>
+      <div><b>MSc</b>Computational Intelligence</div>
+      <!-- <div><b>MBA</b>AI &amp; Big Data · USP</div> -->
+    </div>
+    <div class="social">
+      <a href="https://linkedin.com/in/hygorxaraujo">↗ LinkedIn</a>
+      <a href="https://github.com/hygorxaraujo">↗ GitHub</a>
+      <a href="mailto:contact@hygorxaraujo.com">✉ E-mail</a>
+    </div>
+  </div>
+  <div class="graph-wrap">
+    <div class="graph">
+      <svg viewbox="0 0 380 320" aria-hidden="true">
+        <g class="edges">
+          <path class="edge" d="M190 160 L90 70"></path><path class="edge" d="M190 160 L300 90"></path>
+          <path class="edge" d="M190 160 L70 230"></path><path class="edge" d="M190 160 L310 240"></path>
+          <path class="edge" d="M190 160 L185 40"></path><path class="edge" d="M190 160 L200 290"></path>
+          <path class="edge" d="M90 70 L185 40"></path><path class="edge" d="M300 90 L185 40"></path>
+          <path class="edge" d="M70 230 L200 290"></path><path class="edge" d="M310 240 L200 290"></path>
+          <path class="edge" d="M90 70 L70 230"></path><path class="edge" d="M300 90 L310 240"></path>
+          <path class="edge" d="M300 90 L250 165"></path><path class="edge" d="M190 160 L250 165"></path>
+          <path class="edge" d="M90 70 L130 150"></path><path class="edge" d="M190 160 L130 150"></path>
+        </g>
+        <circle class="node" cx="185" cy="40" r="5"></circle>
+        <circle class="node" cx="90" cy="70" r="6"></circle>
+        <circle class="node" cx="300" cy="90" r="6"></circle>
+        <circle class="node" cx="70" cy="230" r="5"></circle>
+        <circle class="node" cx="310" cy="240" r="6"></circle>
+        <circle class="node" cx="200" cy="290" r="5"></circle>
+        <circle class="node" cx="250" cy="165" r="4"></circle>
+        <circle class="node" cx="130" cy="150" r="4"></circle>
+        <circle class="node hot pulse" cx="190" cy="160" r="9"></circle>
+      </svg>
+    </div>
+    <span class="cap">fig. 1 — knowledge propagation</span>
+  </div>
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="listing-section-head">
+  <h2 class="anchored">Writing</h2>
+  <span>Selected · 2018—2026</span>
+</div>
+<div id="listing-writing" class="quarto-listing quarto-listing-container-default">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="cHl0aG9uJTJDdGVuc29yZmxvdyUyQ2N1ZGE=" data-listing-date-sort="1746241200000" data-listing-file-modified-sort="1746312127838" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="637">
-<div class="thumbnail"><a href="./posts/2025-05-03-installing_tensorflow2.19_on_fedora42.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
+<div class="quarto-post image-right" data-index="0" data-categories="cHl0aG9uJTJDdGVuc29yZmxvdyUyQ2N1ZGE=" data-listing-date-sort="1746241200000" data-listing-file-modified-sort="1780261980196" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="637">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2025-05-03-installing_tensorflow2.19_on_fedora42.html" class="no-external">Installing TensorFlow 2.19 with GPU support on Fedora 42</a>
@@ -418,27 +486,16 @@ window.Quarto = {
 <div class="listing-category" onclick="window.quartoListingCategory('Y3VkYQ=='); return false;">cuda</div>
 
 </div>
-<div class="delink listing-description"><a href="./posts/2025-05-03-installing_tensorflow2.19_on_fedora42.html" class="no-external">
-This post aims to be a simple guide on how to install TensorFlow 2.19 with GPU support on Fedora 42.
-</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2025-05-03-installing_tensorflow2.19_on_fedora42.html" class="no-external">
 <div class="listing-date">
 May 3, 2025
 </div>
-<div class="listing-author">
-Hygor X. Araújo
-</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="cHl0aG9uJTJDbWF0cGxvdGxpYiUyQ3Byb2R1Y3Rpdml0eQ==" data-listing-date-sort="1583636400000" data-listing-file-modified-sort="1746206255787" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="445">
-<div class="thumbnail"><a href="./posts/2020-03-08-explaining-the-fogg-behavior-model.html" class="no-external">
-
-<p class="card-img-top"><img src="posts/2020-03-08-explaining-the-fogg-behavior-model_files/figure-html/fig-bmap-output-1.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
+<div class="quarto-post image-right" data-index="1" data-categories="cHl0aG9uJTJDbWF0cGxvdGxpYiUyQ3Byb2R1Y3Rpdml0eQ==" data-listing-date-sort="1583636400000" data-listing-file-modified-sort="1780261926022" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="445">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2020-03-08-explaining-the-fogg-behavior-model.html" class="no-external">Explaining the Fogg Behavior Model</a>
@@ -452,27 +509,16 @@ Hygor X. Araújo
 <div class="listing-category" onclick="window.quartoListingCategory('cHJvZHVjdGl2aXR5'); return false;">productivity</div>
 
 </div>
-<div class="delink listing-description"><a href="./posts/2020-03-08-explaining-the-fogg-behavior-model.html" class="no-external">
-In this post, I would like to explain the Fogg Behavior Model, created by Brian Jeffrey Fogg (B. J. Fogg). <!-- TEASER_END -->
-</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2020-03-08-explaining-the-fogg-behavior-model.html" class="no-external">
 <div class="listing-date">
 Mar 8, 2020
 </div>
-<div class="listing-author">
-Hygor X. Araújo
-</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="cHl0aG9uJTJDcGFuZGFzJTJDbnVtcHk=" data-listing-date-sort="1530327600000" data-listing-file-modified-sort="1746306753977" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="438">
-<div class="thumbnail"><a href="./posts/2018-06-30-pandas-check-nan.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
+<div class="quarto-post image-right" data-index="2" data-categories="cHl0aG9uJTJDcGFuZGFzJTJDbnVtcHk=" data-listing-date-sort="1530327600000" data-listing-file-modified-sort="1780261875245" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="438">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2018-06-30-pandas-check-nan.html" class="no-external">How to check missing values in pandas</a>
@@ -486,24 +532,23 @@ Hygor X. Araújo
 <div class="listing-category" onclick="window.quartoListingCategory('bnVtcHk='); return false;">numpy</div>
 
 </div>
-<div class="delink listing-description"><a href="./posts/2018-06-30-pandas-check-nan.html" class="no-external">
-In this article I would like to describe how to find NaN values in a pandas DataFrame. This kind of operation can be very useful given that is common to find datasets with…
-</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2018-06-30-pandas-check-nan.html" class="no-external">
 <div class="listing-date">
 Jun 30, 2018
 </div>
-<div class="listing-author">
-Hygor X. Araújo
-</div>
 </a>
 </div>
 </div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</div>
+
+
+
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -568,13 +613,14 @@ Hygor X. Araújo
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -924,7 +970,7 @@ Hygor X. Araújo
     </div>   
     <div class="nav-footer-center">
 
-<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+<div class="toc-actions"><ul><li><a href="https://github.com/hygorxaraujo/personalsite/issues" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

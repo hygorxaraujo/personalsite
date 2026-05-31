@@ -2,15 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Hygor X. Araújo">
 <meta name="dcterms.date" content="2018-06-30">
+<meta name="description" content="A practical guide on how to check, count, and analyze missing (NaN) values in a pandas DataFrame using Python’s NumPy and pandas library.">
 
 <title>How to check missing values in pandas – hygorxaraujo</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -60,13 +64,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../assets/favicon.ico" rel="icon">
 <script src="../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -75,14 +80,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-748b535e376f14d4692bf2b2e5fd6380.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-a07183d3e397355e670fc717ada12dd0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-a5f2ff12af11f1b9d8d7667aa8fb8bf9.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-a07183d3e397355e670fc717ada12dd0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-ab5f6965b9442f1662ce4b78cc6f4ef1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-f4dfbb687ec2d06740e380d35ecef104.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-ab5f6965b9442f1662ce4b78cc6f4ef1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-37b967002985f83436846c62887a9e57.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-c3f27c8ffbef73149d099f7e49a7ccdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-37b967002985f83436846c62887a9e57.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -123,9 +128,9 @@ gtag('config', 'G-FBHJ31L8R4', { 'anonymize_ip': true});
 <script type="text/javascript" charset="UTF-8">
 document.addEventListener('DOMContentLoaded', function () {
 cookieconsent.run({
-  "notice_banner_type":"headline",
+  "notice_banner_type":"simple",
   "consent_type":"express",
-  "palette":"dark",
+  "palette":"light",
   "language":"en",
   "page_load_consent_levels":["strictly-necessary"],
   "notice_banner_reject_button_hide":false,
@@ -137,15 +142,37 @@ cookieconsent.run({
 });
 </script> 
   
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<style>
+
+      .quarto-title-block .quarto-title-banner h1,
+      .quarto-title-block .quarto-title-banner h2,
+      .quarto-title-block .quarto-title-banner h3,
+      .quarto-title-block .quarto-title-banner h4,
+      .quarto-title-block .quarto-title-banner h5,
+      .quarto-title-block .quarto-title-banner h6
+      {
+        color: #FAFAF7;
+      }
+
+      .quarto-title-block .quarto-title-banner {
+        color: #FAFAF7;
+background: url(../assets/headers/default_header.svg);
+      }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
-<link rel="stylesheet" href="../styles.css">
 <meta property="og:title" content="How to check missing values in pandas – hygorxaraujo">
-<meta property="og:description" content="My personal blog">
+<meta property="og:description" content="A practical guide on how to check, count, and analyze missing (NaN) values in a pandas DataFrame using Python’s NumPy and pandas library.">
+<meta property="og:image" content="https://hygorxaraujo.com//assets/headers/2018-06-30-pandas-check-nan.svg">
 <meta property="og:site_name" content="hygorxaraujo">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:title" content="How to check missing values in pandas – hygorxaraujo">
+<meta name="twitter:description" content="A practical guide on how to check, count, and analyze missing (NaN) values in a pandas DataFrame using Python’s NumPy and pandas library.">
+<meta name="twitter:image" content="https://hygorxaraujo.com//assets/headers/2018-06-30-pandas-check-nan.svg">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -302,6 +329,7 @@ cookieconsent.run({
       toggleColorMode(toAlternate);
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
     };
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
@@ -316,8 +344,12 @@ cookieconsent.run({
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../assets/profile.jpg" alt="" class="navbar-logo light-content">
+    <img src="../assets/profile.jpg" alt="" class="navbar-logo dark-content">
+    </a>
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">hygorxaraujo</span>
+    <span class="navbar-title">Hygor X. Araújo</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -325,6 +357,12 @@ cookieconsent.run({
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Writing</span></a>
+  </li>  
+</ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../about.html"> 
@@ -339,6 +377,11 @@ cookieconsent.run({
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -348,7 +391,12 @@ cookieconsent.run({
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">How to check missing values in pandas</h1>
-                                <div class="quarto-categories">
+                  <div>
+        <div class="description">
+          A practical guide on how to check, count, and analyze missing (NaN) values in a pandas DataFrame using Python’s NumPy and pandas library.
+        </div>
+      </div>
+                          <div class="quarto-categories">
                 <div class="quarto-category">python</div>
                 <div class="quarto-category">pandas</div>
                 <div class="quarto-category">numpy</div>
@@ -391,7 +439,7 @@ cookieconsent.run({
   <li><a href="#dealing-with-missing-values" id="toc-dealing-with-missing-values" class="nav-link" data-scroll-target="#dealing-with-missing-values">Dealing with missing values</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References:</a></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/hygorxaraujo/personalsite/issues" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -406,28 +454,28 @@ cookieconsent.run({
 <section id="import-necessary-packages" class="level4">
 <h4 class="anchored" data-anchor-id="import-necessary-packages">Import necessary packages</h4>
 <div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:54.528810Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.129573Z&quot;}}" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="im">import</span> platform</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="im">import</span> platform</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:54.538875Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.532389Z&quot;}}" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="bu">print</span>(<span class="ss">f'Python version: </span><span class="sc">{</span>platform<span class="sc">.</span>python_version()<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>platform<span class="sc">.</span>python_implementation()<span class="sc">}</span><span class="ss">)'</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="bu">print</span>(<span class="ss">f'Python version: </span><span class="sc">{</span>platform<span class="sc">.</span>python_version()<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>platform<span class="sc">.</span>python_implementation()<span class="sc">}</span><span class="ss">)'</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="bu">print</span>(<span class="ss">f'Pandas version: </span><span class="sc">{</span>pd<span class="sc">.</span>__version__<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="bu">print</span>(<span class="ss">f'Numpy version: </span><span class="sc">{</span>np<span class="sc">.</span>__version__<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="bu">print</span>(<span class="ss">f'Numpy version: </span><span class="sc">{</span>np<span class="sc">.</span>__version__<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Python version: 3.13.3 (CPython)
-Pandas version: 2.2.3
-Numpy version: 2.2.5</code></pre>
+<pre><code>Python version: 3.12.12 (CPython)
+Pandas version: 3.0.0
+Numpy version: 2.4.2</code></pre>
 </div>
 </div>
 </section>
 <section id="generate-data-with-nan-values" class="level3">
 <h3 class="anchored" data-anchor-id="generate-data-with-nan-values">Generate data with NaN values</h3>
 <div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:54.710500Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.542433Z&quot;}}" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>num_nan <span class="op">=</span> <span class="dv">25</span> <span class="co"># number of NaN values wanted in the generated data</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>num_nan <span class="op">=</span> <span class="dv">25</span> <span class="co"># number of NaN values wanted in the generated data</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>np.random.seed(<span class="dv">6765431</span>)  <span class="co"># set a seed for reproducibility</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a>A <span class="op">=</span> np.random.randn(<span class="dv">10</span>, <span class="dv">10</span>)</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="bu">print</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="bu">print</span>(A)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[-1.56132314 -0.16954058 -0.17845422 -1.33689111 -0.19185078 -1.18617765
    0.44499302 -0.61209568  0.31170935  1.4127548 ]
@@ -452,9 +500,9 @@ Numpy version: 2.2.5</code></pre>
 </div>
 </div>
 <div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:54.822449Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.713525Z&quot;}}" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Set random values to nan</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Set random values to nan</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>A.ravel()[np.random.choice(A.size, num_nan, replace<span class="op">=</span><span class="va">False</span>)] <span class="op">=</span> np.nan</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="bu">print</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="bu">print</span>(A)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[-1.56132314 -0.16954058 -0.17845422 -1.33689111 -0.19185078 -1.18617765
           nan -0.61209568  0.31170935  1.4127548 ]
@@ -479,14 +527,14 @@ Numpy version: 2.2.5</code></pre>
 </div>
 </div>
 <div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:54.956204Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.824755Z&quot;}}" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Create a DataFrame from the generated data</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Create a DataFrame from the generated data</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a>df <span class="op">=</span> pd.DataFrame(A)</span>
-<span id="cb8-3"><a href="#cb8-3"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-3"><a href="#cb8-3"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -504,7 +552,7 @@ Numpy version: 2.2.5</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>-1.561323</td>
 <td>-0.169541</td>
 <td>-0.178454</td>
@@ -517,7 +565,7 @@ Numpy version: 2.2.5</code></pre>
 <td>1.412755</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>0.853305</td>
 <td>0.685175</td>
 <td>NaN</td>
@@ -530,7 +578,7 @@ Numpy version: 2.2.5</code></pre>
 <td>0.781031</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>-0.816143</td>
 <td>0.159069</td>
 <td>0.499401</td>
@@ -543,7 +591,7 @@ Numpy version: 2.2.5</code></pre>
 <td>1.025504</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th data-quarto-table-cell-role="th">3</th>
 <td>-1.963400</td>
 <td>0.075933</td>
 <td>NaN</td>
@@ -556,7 +604,7 @@ Numpy version: 2.2.5</code></pre>
 <td>-0.160657</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>-1.243214</td>
 <td>-0.898169</td>
 <td>0.028247</td>
@@ -569,7 +617,7 @@ Numpy version: 2.2.5</code></pre>
 <td>-0.839084</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
+<th data-quarto-table-cell-role="th">5</th>
 <td>1.009670</td>
 <td>0.842401</td>
 <td>NaN</td>
@@ -582,7 +630,7 @@ Numpy version: 2.2.5</code></pre>
 <td>0.475758</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
+<th data-quarto-table-cell-role="th">6</th>
 <td>0.965163</td>
 <td>NaN</td>
 <td>-0.821551</td>
@@ -595,7 +643,7 @@ Numpy version: 2.2.5</code></pre>
 <td>NaN</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
+<th data-quarto-table-cell-role="th">7</th>
 <td>-0.864927</td>
 <td>0.824432</td>
 <td>-0.482469</td>
@@ -608,7 +656,7 @@ Numpy version: 2.2.5</code></pre>
 <td>NaN</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
+<th data-quarto-table-cell-role="th">8</th>
 <td>-0.072640</td>
 <td>NaN</td>
 <td>1.309103</td>
@@ -621,7 +669,7 @@ Numpy version: 2.2.5</code></pre>
 <td>NaN</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
+<th data-quarto-table-cell-role="th">9</th>
 <td>NaN</td>
 <td>NaN</td>
 <td>NaN</td>
@@ -645,12 +693,12 @@ Numpy version: 2.2.5</code></pre>
 <p>Now that we have some data to operate on let’s see the different ways we can check for missing values.</p>
 <p>There are two methods of the DataFrame object that can be used: <code>DataFrame#isna()</code> and <code>DataFrame#isnull()</code>. But if you check the source code it seems that <code>isnull()</code> is only an alias for the <code>isna()</code> method. To keep it simple I will only use the <code>isna()</code> method as we would get the same result using <code>isnull()</code>.</p>
 <div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.065320Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.958256Z&quot;}}" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>df.isna()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>df.isna()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -668,7 +716,7 @@ Numpy version: 2.2.5</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>False</td>
 <td>False</td>
 <td>False</td>
@@ -681,7 +729,7 @@ Numpy version: 2.2.5</code></pre>
 <td>False</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>False</td>
 <td>False</td>
 <td>True</td>
@@ -694,7 +742,7 @@ Numpy version: 2.2.5</code></pre>
 <td>False</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>False</td>
 <td>False</td>
 <td>False</td>
@@ -707,7 +755,7 @@ Numpy version: 2.2.5</code></pre>
 <td>False</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th data-quarto-table-cell-role="th">3</th>
 <td>False</td>
 <td>False</td>
 <td>True</td>
@@ -720,7 +768,7 @@ Numpy version: 2.2.5</code></pre>
 <td>False</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>False</td>
 <td>False</td>
 <td>False</td>
@@ -733,7 +781,7 @@ Numpy version: 2.2.5</code></pre>
 <td>False</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
+<th data-quarto-table-cell-role="th">5</th>
 <td>False</td>
 <td>False</td>
 <td>True</td>
@@ -746,7 +794,7 @@ Numpy version: 2.2.5</code></pre>
 <td>False</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
+<th data-quarto-table-cell-role="th">6</th>
 <td>False</td>
 <td>True</td>
 <td>False</td>
@@ -759,7 +807,7 @@ Numpy version: 2.2.5</code></pre>
 <td>True</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
+<th data-quarto-table-cell-role="th">7</th>
 <td>False</td>
 <td>False</td>
 <td>False</td>
@@ -772,7 +820,7 @@ Numpy version: 2.2.5</code></pre>
 <td>True</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
+<th data-quarto-table-cell-role="th">8</th>
 <td>False</td>
 <td>True</td>
 <td>False</td>
@@ -785,7 +833,7 @@ Numpy version: 2.2.5</code></pre>
 <td>True</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
+<th data-quarto-table-cell-role="th">9</th>
 <td>True</td>
 <td>True</td>
 <td>True</td>
@@ -806,7 +854,7 @@ Numpy version: 2.2.5</code></pre>
 <p>As it can be seen above when we use the <code>isna()</code> method it returns a DataFrame with boolean values, where <code>True</code> indicates NaN values and <code>False</code> otherwise.</p>
 <p>If we wanted to know how many missing values there are on each row or column we could use the <code>DataFrame#sum()</code> method:</p>
 <div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.185760Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.067021Z&quot;}}" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>df.isna().<span class="bu">sum</span>(axis<span class="op">=</span><span class="st">'rows'</span>)  <span class="co"># 'rows' or 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>df.isna().<span class="bu">sum</span>(axis<span class="op">=</span><span class="st">'rows'</span>)  <span class="co"># 'rows' or 0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>0    1
 1    3
@@ -822,7 +870,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.288862Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.187682Z&quot;}}" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>df.isna().<span class="bu">sum</span>(axis<span class="op">=</span><span class="st">'columns'</span>)  <span class="co"># 'columns' or 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>df.isna().<span class="bu">sum</span>(axis<span class="op">=</span><span class="st">'columns'</span>)  <span class="co"># 'columns' or 1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>0    1
 1    3
@@ -839,14 +887,14 @@ dtype: int64</code></pre>
 </div>
 <p>To simply know the total number of missing values we can call <code>sum()</code> again:</p>
 <div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.400051Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.290994Z&quot;}}" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>df.isna().<span class="bu">sum</span>().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>df.isna().<span class="bu">sum</span>().<span class="bu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>np.int64(25)</code></pre>
 </div>
 </div>
 <p>If we simply wanna know if there is any missing value with no care for the quantity we can simply use the <code>any()</code> method:</p>
 <div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.516972Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.402633Z&quot;}}" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>df.isna().<span class="bu">any</span>()  <span class="co"># can also receive axis='rows' or 'columns'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>df.isna().<span class="bu">any</span>()  <span class="co"># can also receive axis='rows' or 'columns'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>0    True
 1    True
@@ -863,15 +911,15 @@ dtype: bool</code></pre>
 </div>
 <p>Calling it again we have a single boolean output:</p>
 <div id="cell-22" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.634347Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.518727Z&quot;}}" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>df.isna().<span class="bu">any</span>().<span class="bu">any</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>df.isna().<span class="bu">any</span>().<span class="bu">any</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>np.True_</code></pre>
 </div>
 </div>
 <p>Besides the <code>isna()</code> method we also have the <code>notna()</code> method which is its boolean inverse. Applying it we can get the number of values that are not missing or simply if all values are not missing (but using the <code>all()</code> method instead of <code>any()</code>).</p>
 <div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.755759Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.636133Z&quot;}}" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="bu">print</span>(df.notna().<span class="bu">sum</span>().<span class="bu">sum</span>())  <span class="co"># not missing</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="bu">print</span>(df.notna().<span class="bu">all</span>().<span class="bu">all</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="bu">print</span>(df.notna().<span class="bu">sum</span>().<span class="bu">sum</span>())  <span class="co"># not missing</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="bu">print</span>(df.notna().<span class="bu">all</span>().<span class="bu">all</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>75
 False</code></pre>
@@ -879,8 +927,8 @@ False</code></pre>
 </div>
 <p>Note 1: in the examples, it was used the DataFrame methods to check for missing values, but the pandas package has its own functions with the same purpose that can be applied to other objects. Example:</p>
 <div id="cell-26" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.875265Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.757785Z&quot;}}" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="bu">print</span>(pd.isna([<span class="dv">1</span>, <span class="dv">2</span>, np.nan]))</span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="bu">print</span>(pd.notna([<span class="dv">1</span>, <span class="dv">2</span>, np.nan]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="bu">print</span>(pd.isna([<span class="dv">1</span>, <span class="dv">2</span>, np.nan]))</span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="bu">print</span>(pd.notna([<span class="dv">1</span>, <span class="dv">2</span>, np.nan]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[False False  True]
 [ True  True False]</code></pre>
@@ -892,15 +940,15 @@ False</code></pre>
 <h3 class="anchored" data-anchor-id="time-comparison">Time comparison</h3>
 <p>Comparing the time taken by the two methods we can see that using <code>any()</code> is faster but <code>sum()</code> will give us the additional information about how many missing values there are.</p>
 <div id="cell-30" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:58.700850Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.876821Z&quot;}}" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a><span class="op">%</span>timeit df.isna().<span class="bu">any</span>().<span class="bu">any</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a><span class="op">%</span>timeit df.isna().<span class="bu">any</span>().<span class="bu">any</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>439 μs ± 6.27 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)</code></pre>
+<pre><code>158 μs ± 19.5 μs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)</code></pre>
 </div>
 </div>
 <div id="cell-31" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:47:03.356772Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:58.702580Z&quot;}}" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a><span class="op">%</span>timeit df.isna().<span class="bu">sum</span>().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a><span class="op">%</span>timeit df.isna().<span class="bu">sum</span>().<span class="bu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>382 μs ± 26.4 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)</code></pre>
+<pre><code>107 μs ± 4.85 μs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)</code></pre>
 </div>
 </div>
 </section>
@@ -909,12 +957,12 @@ False</code></pre>
 <p>Two easy ways to deal with missing values are removing them or filling them with some value. These can be achieved with the <code>dropna()</code> and <code>fillna()</code> methods.</p>
 <p>The <code>dropna()</code> method will return a DataFrame without the rows and columns containing missing values.</p>
 <div id="cell-35" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:47:03.392158Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:47:03.359645Z&quot;}}" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a>df.dropna()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a>df.dropna()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -932,7 +980,7 @@ False</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>-1.243214</td>
 <td>-0.898169</td>
 <td>0.028247</td>
@@ -952,12 +1000,12 @@ False</code></pre>
 </div>
 <p>The <code>fillna()</code> method will return a DataFrame with the missing values filled with a specified value.</p>
 <div id="cell-37" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:47:03.504912Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:47:03.395757Z&quot;}}" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a>df.fillna(value<span class="op">=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a>df.fillna(value<span class="op">=</span><span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -975,7 +1023,7 @@ False</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>-1.561323</td>
 <td>-0.169541</td>
 <td>-0.178454</td>
@@ -988,7 +1036,7 @@ False</code></pre>
 <td>1.412755</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>0.853305</td>
 <td>0.685175</td>
 <td>5.000000</td>
@@ -1001,7 +1049,7 @@ False</code></pre>
 <td>0.781031</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>-0.816143</td>
 <td>0.159069</td>
 <td>0.499401</td>
@@ -1014,7 +1062,7 @@ False</code></pre>
 <td>1.025504</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th data-quarto-table-cell-role="th">3</th>
 <td>-1.963400</td>
 <td>0.075933</td>
 <td>5.000000</td>
@@ -1027,7 +1075,7 @@ False</code></pre>
 <td>-0.160657</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>-1.243214</td>
 <td>-0.898169</td>
 <td>0.028247</td>
@@ -1040,7 +1088,7 @@ False</code></pre>
 <td>-0.839084</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
+<th data-quarto-table-cell-role="th">5</th>
 <td>1.009670</td>
 <td>0.842401</td>
 <td>5.000000</td>
@@ -1053,7 +1101,7 @@ False</code></pre>
 <td>0.475758</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
+<th data-quarto-table-cell-role="th">6</th>
 <td>0.965163</td>
 <td>5.000000</td>
 <td>-0.821551</td>
@@ -1066,7 +1114,7 @@ False</code></pre>
 <td>5.000000</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
+<th data-quarto-table-cell-role="th">7</th>
 <td>-0.864927</td>
 <td>0.824432</td>
 <td>-0.482469</td>
@@ -1079,7 +1127,7 @@ False</code></pre>
 <td>5.000000</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
+<th data-quarto-table-cell-role="th">8</th>
 <td>-0.072640</td>
 <td>5.000000</td>
 <td>1.309103</td>
@@ -1092,7 +1140,7 @@ False</code></pre>
 <td>5.000000</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
+<th data-quarto-table-cell-role="th">9</th>
 <td>5.000000</td>
 <td>5.000000</td>
 <td>5.000000</td>
@@ -1126,7 +1174,7 @@ False</code></pre>
 
 </section>
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -1191,13 +1239,14 @@ False</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -1547,7 +1596,7 @@ False</code></pre>
     </div>   
     <div class="nav-footer-center">
 
-<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/hygorxaraujo/personalsite/issues" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

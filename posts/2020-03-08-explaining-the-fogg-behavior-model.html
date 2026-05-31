@@ -2,15 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Hygor X. Araújo">
 <meta name="dcterms.date" content="2020-03-08">
+<meta name="description" content="An explanation of the Fogg Behavior Model (B=MAP) with a visual graph plotted in Python using NumPy and Matplotlib.">
 
-<title>Explaining the Fogg behavior model – hygorxaraujo</title>
+<title>Explaining the Fogg Behavior Model – hygorxaraujo</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -67,6 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../assets/favicon.ico" rel="icon">
 <script src="../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -75,14 +80,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-748b535e376f14d4692bf2b2e5fd6380.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-a07183d3e397355e670fc717ada12dd0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-a5f2ff12af11f1b9d8d7667aa8fb8bf9.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-a07183d3e397355e670fc717ada12dd0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-ab5f6965b9442f1662ce4b78cc6f4ef1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-f4dfbb687ec2d06740e380d35ecef104.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-ab5f6965b9442f1662ce4b78cc6f4ef1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-37b967002985f83436846c62887a9e57.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-c3f27c8ffbef73149d099f7e49a7ccdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-37b967002985f83436846c62887a9e57.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -123,9 +128,9 @@ gtag('config', 'G-FBHJ31L8R4', { 'anonymize_ip': true});
 <script type="text/javascript" charset="UTF-8">
 document.addEventListener('DOMContentLoaded', function () {
 cookieconsent.run({
-  "notice_banner_type":"headline",
+  "notice_banner_type":"simple",
   "consent_type":"express",
-  "palette":"dark",
+  "palette":"light",
   "language":"en",
   "page_load_consent_levels":["strictly-necessary"],
   "notice_banner_reject_button_hide":false,
@@ -137,9 +142,26 @@ cookieconsent.run({
 });
 </script> 
   
+<style>
+
+      .quarto-title-block .quarto-title-banner h1,
+      .quarto-title-block .quarto-title-banner h2,
+      .quarto-title-block .quarto-title-banner h3,
+      .quarto-title-block .quarto-title-banner h4,
+      .quarto-title-block .quarto-title-banner h5,
+      .quarto-title-block .quarto-title-banner h6
+      {
+        color: #FAFAF7;
+      }
+
+      .quarto-title-block .quarto-title-banner {
+        color: #FAFAF7;
+background: url(../assets/headers/default_header.svg);
+      }
+</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -152,7 +174,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -168,13 +190,19 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="../styles.css">
 <meta property="og:title" content="Explaining the Fogg Behavior Model – hygorxaraujo">
-<meta property="og:description" content="My personal blog">
+<meta property="og:description" content="An explanation of the Fogg Behavior Model (B=MAP) with a visual graph plotted in Python using NumPy and Matplotlib.">
 <meta property="og:image" content="https://hygorxaraujo.com/posts/2020-03-08-explaining-the-fogg-behavior-model_files/figure-html/fig-bmap-output-1.png">
 <meta property="og:site_name" content="hygorxaraujo">
+<meta property="og:locale" content="en_US">
 <meta property="og:image:height" content="889">
 <meta property="og:image:width" content="1258">
+<meta name="twitter:title" content="Explaining the Fogg Behavior Model – hygorxaraujo">
+<meta name="twitter:description" content="An explanation of the Fogg Behavior Model (B=MAP) with a visual graph plotted in Python using NumPy and Matplotlib.">
+<meta name="twitter:image" content="https://hygorxaraujo.com/posts/2020-03-08-explaining-the-fogg-behavior-model_files/figure-html/fig-bmap-output-1.png">
+<meta name="twitter:image-height" content="889">
+<meta name="twitter:image-width" content="1258">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -331,6 +359,7 @@ window.Quarto = {
       toggleColorMode(toAlternate);
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
     };
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
@@ -345,8 +374,12 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../assets/profile.jpg" alt="" class="navbar-logo light-content">
+    <img src="../assets/profile.jpg" alt="" class="navbar-logo dark-content">
+    </a>
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">hygorxaraujo</span>
+    <span class="navbar-title">Hygor X. Araújo</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -354,6 +387,12 @@ window.Quarto = {
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Writing</span></a>
+  </li>  
+</ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../about.html"> 
@@ -368,6 +407,11 @@ window.Quarto = {
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -376,8 +420,13 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Explaining the Fogg behavior model</h1>
-                                <div class="quarto-categories">
+      <h1 class="title">Explaining the Fogg Behavior Model</h1>
+                  <div>
+        <div class="description">
+          An explanation of the Fogg Behavior Model (B=MAP) with a visual graph plotted in Python using NumPy and Matplotlib.
+        </div>
+      </div>
+                          <div class="quarto-categories">
                 <div class="quarto-category">python</div>
                 <div class="quarto-category">matplotlib</div>
                 <div class="quarto-category">productivity</div>
@@ -416,7 +465,7 @@ window.Quarto = {
   <ul>
   <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/hygorxaraujo/personalsite/issues" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -431,10 +480,10 @@ window.Quarto = {
 <p><span class="math inline">\(B = MAP\)</span></p>
 <p>We can visualize the relationship between motivation, ability and the prompt in a two-dimensional graphic.</p>
 <p>I plotted the graphic below using Python and the NumPy and Matplotlib packages. I kept the code for anyone who is interested in how to do it.</p>
-<div class="cell" data-execution_count="1">
+<div id="cell-fig-bmap" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
 <span id="cb1-4"><a href="#cb1-4"></a>text <span class="op">=</span> { <span class="co"># text dict for easier translation</span></span>
@@ -497,7 +546,7 @@ window.Quarto = {
 <span id="cb1-61"><a href="#cb1-61"></a>                                                   tp.reshape((<span class="dv">1</span>, <span class="dv">2</span>)))[<span class="dv">0</span>]</span>
 <span id="cb1-62"><a href="#cb1-62"></a>plt.text(tp[<span class="dv">0</span>], tp[<span class="dv">1</span>], text[<span class="st">'action_line'</span>], fontsize<span class="op">=</span><span class="dv">12</span>,</span>
 <span id="cb1-63"><a href="#cb1-63"></a>         rotation<span class="op">=</span>trans_angle, rotation_mode<span class="op">=</span><span class="st">'anchor'</span>)</span>
-<span id="cb1-64"><a href="#cb1-64"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-64"><a href="#cb1-64"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-bmap" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -516,9 +565,17 @@ Figure&nbsp;1: Image based in the Fogg Behavior Model (as presented in the book)
 <p>On the contrary, if the behavior is easy to do and we have the motivation when the prompt surges the behavior will be a success!</p>
 <p>Thinking in the process of building new habits, we could use this model as a guide on how to develop a new one. After choosing the right behavior, make sure you have the right motivation for it and make it really easy to do it! In other words, you should make it as simple and small so that there is no chance you will not do it. In this way, each time you are successful with your behavior you are taking a step in making it a new habit.</p>
 <p>A similar conclusion can be thought in the process of stopping a bad habit, make it really hard to do, so that even when the prompt arises you will be less likely to do it.</p>
-<p>This is the suggested template by B. J. Fogg to create a new behavior: &gt; After I …, I will … . Then, I celebrate!</p>
+<p>This is the suggested template by B. J. Fogg to create a new behavior:</p>
+<blockquote class="blockquote">
+<p>After I ______, I will ______. Then, I celebrate!</p>
+</blockquote>
 <p>The celebration is an important step for you to connect the behavior with something positive that should be repeated.</p>
-<p>If you think the behavior you tried to create is not working, try this troubleshoot method: 1. Check prompt 2. Check ability 3. Check motivation</p>
+<p>If you think the behavior you tried to create is not working, try this troubleshoot method:</p>
+<ol type="1">
+<li>Check prompt</li>
+<li>Check ability</li>
+<li>Check motivation</li>
+</ol>
 <p>And keep trying out and learning more about yourself, one small step at a time.</p>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
@@ -531,7 +588,7 @@ Figure&nbsp;1: Image based in the Fogg Behavior Model (as presented in the book)
 
 </section>
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -596,13 +653,14 @@ Figure&nbsp;1: Image based in the Fogg Behavior Model (as presented in the book)
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -952,7 +1010,7 @@ Figure&nbsp;1: Image based in the Fogg Behavior Model (as presented in the book)
     </div>   
     <div class="nav-footer-center">
 
-<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/hygorxaraujo/personalsite/issues" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

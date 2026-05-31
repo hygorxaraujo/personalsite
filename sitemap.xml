@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hygorxaraujo.com/about.html</loc>
+    <lastmod>2026-05-31T21:10:24.050Z</lastmod>
+  </url>
+  <url>
     <loc>https://hygorxaraujo.com/posts/2025-05-03-installing_tensorflow2.19_on_fedora42.html</loc>
-    <lastmod>2025-05-03T22:42:07.838Z</lastmod>
+    <lastmod>2026-05-31T21:13:00.196Z</lastmod>
   </url>
   <url>
     <loc>https://hygorxaraujo.com/posts/2020-03-08-explaining-the-fogg-behavior-model.html</loc>
-    <lastmod>2025-05-02T17:17:35.787Z</lastmod>
-  </url>
-  <url>
-    <loc>https://hygorxaraujo.com/about.html</loc>
-    <lastmod>2025-05-02T18:53:29.102Z</lastmod>
-  </url>
-  <url>
-    <loc>https://hygorxaraujo.com/index.html</loc>
-    <lastmod>2025-05-02T17:17:35.786Z</lastmod>
+    <lastmod>2026-05-31T21:12:06.022Z</lastmod>
   </url>
   <url>
     <loc>https://hygorxaraujo.com/posts/2018-06-30-pandas-check-nan.html</loc>
-    <lastmod>2025-05-03T21:12:33.977Z</lastmod>
+    <lastmod>2026-05-31T21:11:15.245Z</lastmod>
+  </url>
+  <url>
+    <loc>https://hygorxaraujo.com/index.html</loc>
+    <lastmod>2026-05-31T21:10:06.486Z</lastmod>
   </url>
 </urlset>

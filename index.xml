@@ -8,8 +8,8 @@
 <title>hygorxaraujo</title>
 <link>https://hygorxaraujo.com/</link>
 <atom:link href="https://hygorxaraujo.com/index.xml" rel="self" type="application/rss+xml"/>
-<description>My personal blog</description>
-<generator>quarto-1.7.29</generator>
+<description>Writing on data science, machine learning engineering, and agentic workflows by Hygor X. Araújo, a data scientist and systems engineer specializing in production-grade AI solutions.</description>
+<generator>quarto-1.9.37</generator>
 <lastBuildDate>Sat, 03 May 2025 03:00:00 GMT</lastBuildDate>
 <item>
   <title>Installing TensorFlow 2.19 with GPU support on Fedora 42</title>
@@ -43,7 +43,7 @@
 <ol type="1">
 <li>Install the build requirements</li>
 </ol>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">sudo</span> dnf group install development-tools</span>
 <span id="cb1-2"></span>
@@ -55,18 +55,18 @@ font-style: inherit;">\</span></span>
 <span id="cb1-4">zlib-devel glibc-devel.i686 glibc-devel isl-devel <span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">\</span></span>
-<span id="cb1-5">g++ gcc-gnat gcc-gdc libgphobos-static</span></code></pre></div>
+<span id="cb1-5">g++ gcc-gnat gcc-gdc libgphobos-static</span></code></pre></div></div>
 <ol start="2" type="1">
 <li>Get the source code</li>
 </ol>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">wget</span> https://ftp.gwdg.de/pub/misc/gcc/releases/gcc-13.3.0/gcc-13.3.0.tar.xz</span></code></pre></div>
+font-style: inherit;">wget</span> https://ftp.gwdg.de/pub/misc/gcc/releases/gcc-13.3.0/gcc-13.3.0.tar.xz</span></code></pre></div></div>
 <ol start="3" type="1">
 <li>Extract the source code <code>tar xvf gcc-13.3.0.tar.xz</code></li>
 <li>Configure GCC</li>
 </ol>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Make a build directory</span></span>
 <span id="cb3-2"><span class="bu" style="color: null;
@@ -180,7 +180,7 @@ font-style: inherit;">\</span></span>
 background-color: null;
 font-style: inherit;">--with-build-config</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">=</span>bootstrap-lto</span></code></pre></div>
+font-style: inherit;">=</span>bootstrap-lto</span></code></pre></div></div>
 <ol start="4" type="1">
 <li>Build GCC (this will probably take a long time) <code>make -j&lt;number_of_cores_to_use&gt;</code></li>
 <li>Install GCC <code>sudo make install</code></li>
@@ -192,14 +192,14 @@ font-style: inherit;">=</span>bootstrap-lto</span></code></pre></div>
 <ol type="1">
 <li>Install the driver: You can follow the RPM Fusion guide in the references to install the NVIDIA driver. Basically, you need to have the RPM Fusion repositories enabled in dnf and install the below packages:</li>
 </ol>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">sudo</span> dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda</span></code></pre></div>
+font-style: inherit;">sudo</span> dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda</span></code></pre></div></div>
 <ol start="2" type="1">
 <li>Reboot your system</li>
 <li>Check the modules with:</li>
 </ol>
-<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># loaded modules</span></span>
 <span id="cb5-2"><span class="fu" style="color: #4758AB;
@@ -223,7 +223,7 @@ background-color: null;
 font-style: inherit;"># NVIDIA system management interface</span></span>
 <span id="cb5-8"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">nvidia-smi</span></span></code></pre></div>
+font-style: inherit;">nvidia-smi</span></span></code></pre></div></div>
 <p>Note: you will need to disable secure boot for the <code>akmod-nvidia</code> to work.</p>
 </section>
 <section id="install-nvidia-cuda-toolkit-12.5" class="level3">
@@ -231,16 +231,16 @@ font-style: inherit;">nvidia-smi</span></span></code></pre></div>
 <ol type="1">
 <li>Get the installation script from the <a href="https://developer.nvidia.com/cuda-12-5-0-download-archive?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=Fedora&amp;target_version=39&amp;target_type=runfile_local">NVIDIA website</a>. It will be like below:</li>
 </ol>
-<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Get the script</span></span>
 <span id="cb6-2"><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">wget</span> https://developer.download.nvidia.com/compute/cuda/12.5.0/local_installers/cuda_12.5.0_555.42.02_linux.run</span></code></pre></div>
+font-style: inherit;">wget</span> https://developer.download.nvidia.com/compute/cuda/12.5.0/local_installers/cuda_12.5.0_555.42.02_linux.run</span></code></pre></div></div>
 <ol start="2" type="1">
 <li>Setup the alternative gcc for CUDA</li>
 </ol>
-<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Create the directory structure that CUDA will use after installation</span></span>
 <span id="cb7-2"><span class="fu" style="color: #4758AB;
@@ -256,11 +256,11 @@ font-style: inherit;"># Create a link for the gcc 13.3 version</span></span>
 background-color: null;
 font-style: inherit;">sudo</span> ln <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">-s</span> /usr/local/bin/gcc-13.3 /usr/local/cuda-12.5/bin/gcc</span></code></pre></div>
+font-style: inherit;">-s</span> /usr/local/bin/gcc-13.3 /usr/local/cuda-12.5/bin/gcc</span></code></pre></div></div>
 <ol start="3" type="1">
 <li>Start the installation Since we are not using the default system GCC from Fedora 42, we need to make sure the installation script will find the correct version. We will do that by overwriting some environment variables during execution: <code>CC</code> and <code>PATH</code>.</li>
 </ol>
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">sudo</span> CC=<span class="st" style="color: #20794D;
 background-color: null;
@@ -276,12 +276,12 @@ font-style: inherit;">--silent</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--toolkit</span> <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">--no-opengl-libs</span></span></code></pre></div>
+font-style: inherit;">--no-opengl-libs</span></span></code></pre></div></div>
 <p>This will install the toolkit with the default options, without installing the NVIDIA driver again and accepting the End User License Agreement (EULA).</p>
 <ol start="4" type="1">
 <li>Update environment variable in your <code>.bashrc</code> or <code>.zshrc</code>:</li>
 </ol>
-<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="bu" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">export</span> <span class="va" style="color: #111111;
 background-color: null;
@@ -298,7 +298,7 @@ font-style: inherit;">LD_LIBRARY_PATH</span><span class="op" style="color: #5E5E
 background-color: null;
 font-style: inherit;">=</span>/usr/local/cuda-12.5/lib64:<span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">$LD_LIBRARY_PATH</span></span></code></pre></div>
+font-style: inherit;">$LD_LIBRARY_PATH</span></span></code></pre></div></div>
 <ol start="5" type="1">
 <li>Check the installation with <code>nvcc --version</code></li>
 </ol>
@@ -312,7 +312,7 @@ font-style: inherit;">$LD_LIBRARY_PATH</span></span></code></pre></div>
 <li>Install TensorFlow with <code>uv add "tensorflow[and-cuda]==2.19"</code></li>
 <li>Manually link the required libraries with TensorFlow</li>
 </ol>
-<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Navigate into the main TensorFlow package directory</span></span>
 <span id="cb10-2"><span class="bu" style="color: null;
@@ -402,12 +402,12 @@ font-style: inherit;">-quit</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">)</span> <span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">$VIRTUAL_ENV</span>/bin/ptxas</span></code></pre></div>
+font-style: inherit;">$VIRTUAL_ENV</span>/bin/ptxas</span></code></pre></div></div>
 <ol start="5" type="1">
 <li>Check the installation with the code below. It should list your GPUs, something like <code>[PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]</code></li>
 </ol>
 <div id="3101b9a9f2676008" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2025-05-03T22:42:04.014580Z&quot;,&quot;start_time&quot;:&quot;2025-05-03T22:42:04.011722Z&quot;}}" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><span class="im" style="color: #00769E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> tensorflow <span class="im" style="color: #00769E;
 background-color: null;
@@ -417,7 +417,7 @@ font-style: inherit;">as</span> tf</span>
 background-color: null;
 font-style: inherit;">print</span>(tf.config.list_physical_devices(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">'GPU'</span>))</span></code></pre></div>
+font-style: inherit;">'GPU'</span>))</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]</code></pre>
 </div>
@@ -437,15 +437,16 @@ font-style: inherit;">'GPU'</span>))</span></code></pre></div>
 
 </section>
 
- ]]></description>
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
   <category>python</category>
   <category>tensorflow</category>
   <category>cuda</category>
   <guid>https://hygorxaraujo.com/posts/2025-05-03-installing_tensorflow2.19_on_fedora42.html</guid>
   <pubDate>Sat, 03 May 2025 03:00:00 GMT</pubDate>
+  <media:content url="https://hygorxaraujo.com/assets/headers/default_header.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
-  <title>Explaining the Fogg behavior model</title>
+  <title>Explaining the Fogg Behavior Model</title>
   <dc:creator>Hygor X. Araújo</dc:creator>
   <link>https://hygorxaraujo.com/posts/2020-03-08-explaining-the-fogg-behavior-model.html</link>
   <description><![CDATA[ 
@@ -460,10 +461,10 @@ font-style: inherit;">'GPU'</span>))</span></code></pre></div>
 <p><img src="https://latex.codecogs.com/png.latex?B%20=%20MAP"></p>
 <p>We can visualize the relationship between motivation, ability and the prompt in a two-dimensional graphic.</p>
 <p>I plotted the graphic below using Python and the NumPy and Matplotlib packages. I kept the code for anyone who is interested in how to do it.</p>
-<div class="cell" data-execution_count="1">
+<div id="cell-fig-bmap" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
 background-color: null;
@@ -842,7 +843,7 @@ background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'anchor'</span>)</span>
-<span id="cb1-64">plt.show()</span></code></pre></div>
+<span id="cb1-64">plt.show()</span></code></pre></div></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-bmap" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -861,9 +862,17 @@ Figure&nbsp;1: Image based in the Fogg Behavior Model (as presented in the book)
 <p>On the contrary, if the behavior is easy to do and we have the motivation when the prompt surges the behavior will be a success!</p>
 <p>Thinking in the process of building new habits, we could use this model as a guide on how to develop a new one. After choosing the right behavior, make sure you have the right motivation for it and make it really easy to do it! In other words, you should make it as simple and small so that there is no chance you will not do it. In this way, each time you are successful with your behavior you are taking a step in making it a new habit.</p>
 <p>A similar conclusion can be thought in the process of stopping a bad habit, make it really hard to do, so that even when the prompt arises you will be less likely to do it.</p>
-<p>This is the suggested template by B. J. Fogg to create a new behavior: &gt; After I …, I will … . Then, I celebrate!</p>
+<p>This is the suggested template by B. J. Fogg to create a new behavior:</p>
+<blockquote class="blockquote">
+<p>After I ______, I will ______. Then, I celebrate!</p>
+</blockquote>
 <p>The celebration is an important step for you to connect the behavior with something positive that should be repeated.</p>
-<p>If you think the behavior you tried to create is not working, try this troubleshoot method: 1. Check prompt 2. Check ability 3. Check motivation</p>
+<p>If you think the behavior you tried to create is not working, try this troubleshoot method:</p>
+<ol type="1">
+<li>Check prompt</li>
+<li>Check ability</li>
+<li>Check motivation</li>
+</ol>
 <p>And keep trying out and learning more about yourself, one small step at a time.</p>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
@@ -876,12 +885,13 @@ Figure&nbsp;1: Image based in the Fogg Behavior Model (as presented in the book)
 
 </section>
 
- ]]></description>
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
   <category>python</category>
   <category>matplotlib</category>
   <category>productivity</category>
   <guid>https://hygorxaraujo.com/posts/2020-03-08-explaining-the-fogg-behavior-model.html</guid>
   <pubDate>Sun, 08 Mar 2020 03:00:00 GMT</pubDate>
+  <media:content url="https://hygorxaraujo.com/posts/2020-03-08-explaining-the-fogg-behavior-model_files/figure-html/fig-bmap-output-1.png" medium="image" type="image/png" height="102" width="144"/>
 </item>
 <item>
   <title>How to check missing values in pandas</title>
@@ -899,7 +909,7 @@ Figure&nbsp;1: Image based in the Fogg Behavior Model (as presented in the book)
 <section id="import-necessary-packages" class="level4">
 <h4 class="anchored" data-anchor-id="import-necessary-packages">Import necessary packages</h4>
 <div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:54.528810Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.129573Z&quot;}}" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
 background-color: null;
@@ -911,10 +921,10 @@ background-color: null;
 font-style: inherit;">as</span> np</span>
 <span id="cb1-3"><span class="im" style="color: #00769E;
 background-color: null;
-font-style: inherit;">import</span> platform</span></code></pre></div>
+font-style: inherit;">import</span> platform</span></code></pre></div></div>
 </div>
 <div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:54.538875Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.532389Z&quot;}}" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="bu" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
 background-color: null;
@@ -960,18 +970,18 @@ font-style: inherit;">.</span>__version__<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
-font-style: inherit;">'</span>)</span></code></pre></div>
+font-style: inherit;">'</span>)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Python version: 3.13.3 (CPython)
-Pandas version: 2.2.3
-Numpy version: 2.2.5</code></pre>
+<pre><code>Python version: 3.12.12 (CPython)
+Pandas version: 3.0.0
+Numpy version: 2.4.2</code></pre>
 </div>
 </div>
 </section>
 <section id="generate-data-with-nan-values" class="level3">
 <h3 class="anchored" data-anchor-id="generate-data-with-nan-values">Generate data with NaN values</h3>
 <div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:54.710500Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.542433Z&quot;}}" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1">num_nan <span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1">num_nan <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -992,7 +1002,7 @@ background-color: null;
 font-style: inherit;">10</span>)</span>
 <span id="cb4-4"><span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">print</span>(A)</span></code></pre></div>
+font-style: inherit;">print</span>(A)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[-1.56132314 -0.16954058 -0.17845422 -1.33689111 -0.19185078 -1.18617765
    0.44499302 -0.61209568  0.31170935  1.4127548 ]
@@ -1017,7 +1027,7 @@ font-style: inherit;">print</span>(A)</span></code></pre></div>
 </div>
 </div>
 <div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:54.822449Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.713525Z&quot;}}" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Set random values to nan</span></span>
 <span id="cb6-2">A.ravel()[np.random.choice(A.size, num_nan, replace<span class="op" style="color: #5E5E5E;
@@ -1029,7 +1039,7 @@ background-color: null;
 font-style: inherit;">=</span> np.nan</span>
 <span id="cb6-3"><span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">print</span>(A)</span></code></pre></div>
+font-style: inherit;">print</span>(A)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[-1.56132314 -0.16954058 -0.17845422 -1.33689111 -0.19185078 -1.18617765
           nan -0.61209568  0.31170935  1.4127548 ]
@@ -1054,18 +1064,18 @@ font-style: inherit;">print</span>(A)</span></code></pre></div>
 </div>
 </div>
 <div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:54.956204Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.824755Z&quot;}}" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Create a DataFrame from the generated data</span></span>
 <span id="cb8-2">df <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> pd.DataFrame(A)</span>
-<span id="cb8-3">df</span></code></pre></div>
+<span id="cb8-3">df</span></code></pre></div></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1083,7 +1093,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>-1.561323</td>
 <td>-0.169541</td>
 <td>-0.178454</td>
@@ -1096,7 +1106,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>1.412755</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>0.853305</td>
 <td>0.685175</td>
 <td>NaN</td>
@@ -1109,7 +1119,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>0.781031</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>-0.816143</td>
 <td>0.159069</td>
 <td>0.499401</td>
@@ -1122,7 +1132,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>1.025504</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th data-quarto-table-cell-role="th">3</th>
 <td>-1.963400</td>
 <td>0.075933</td>
 <td>NaN</td>
@@ -1135,7 +1145,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>-0.160657</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>-1.243214</td>
 <td>-0.898169</td>
 <td>0.028247</td>
@@ -1148,7 +1158,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>-0.839084</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
+<th data-quarto-table-cell-role="th">5</th>
 <td>1.009670</td>
 <td>0.842401</td>
 <td>NaN</td>
@@ -1161,7 +1171,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>0.475758</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
+<th data-quarto-table-cell-role="th">6</th>
 <td>0.965163</td>
 <td>NaN</td>
 <td>-0.821551</td>
@@ -1174,7 +1184,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>NaN</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
+<th data-quarto-table-cell-role="th">7</th>
 <td>-0.864927</td>
 <td>0.824432</td>
 <td>-0.482469</td>
@@ -1187,7 +1197,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>NaN</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
+<th data-quarto-table-cell-role="th">8</th>
 <td>-0.072640</td>
 <td>NaN</td>
 <td>1.309103</td>
@@ -1200,7 +1210,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>NaN</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
+<th data-quarto-table-cell-role="th">9</th>
 <td>NaN</td>
 <td>NaN</td>
 <td>NaN</td>
@@ -1224,12 +1234,12 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <p>Now that we have some data to operate on let’s see the different ways we can check for missing values.</p>
 <p>There are two methods of the DataFrame object that can be used: <code>DataFrame#isna()</code> and <code>DataFrame#isnull()</code>. But if you check the source code it seems that <code>isnull()</code> is only an alias for the <code>isna()</code> method. To keep it simple I will only use the <code>isna()</code> method as we would get the same result using <code>isnull()</code>.</p>
 <div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.065320Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:54.958256Z&quot;}}" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1">df.isna()</span></code></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1">df.isna()</span></code></pre></div></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1247,7 +1257,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>False</td>
 <td>False</td>
 <td>False</td>
@@ -1260,7 +1270,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>False</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>False</td>
 <td>False</td>
 <td>True</td>
@@ -1273,7 +1283,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>False</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>False</td>
 <td>False</td>
 <td>False</td>
@@ -1286,7 +1296,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>False</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th data-quarto-table-cell-role="th">3</th>
 <td>False</td>
 <td>False</td>
 <td>True</td>
@@ -1299,7 +1309,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>False</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>False</td>
 <td>False</td>
 <td>False</td>
@@ -1312,7 +1322,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>False</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
+<th data-quarto-table-cell-role="th">5</th>
 <td>False</td>
 <td>False</td>
 <td>True</td>
@@ -1325,7 +1335,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>False</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
+<th data-quarto-table-cell-role="th">6</th>
 <td>False</td>
 <td>True</td>
 <td>False</td>
@@ -1338,7 +1348,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>True</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
+<th data-quarto-table-cell-role="th">7</th>
 <td>False</td>
 <td>False</td>
 <td>False</td>
@@ -1351,7 +1361,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>True</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
+<th data-quarto-table-cell-role="th">8</th>
 <td>False</td>
 <td>True</td>
 <td>False</td>
@@ -1364,7 +1374,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <td>True</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
+<th data-quarto-table-cell-role="th">9</th>
 <td>True</td>
 <td>True</td>
 <td>True</td>
@@ -1385,7 +1395,7 @@ font-style: inherit;">=</span> pd.DataFrame(A)</span>
 <p>As it can be seen above when we use the <code>isna()</code> method it returns a DataFrame with boolean values, where <code>True</code> indicates NaN values and <code>False</code> otherwise.</p>
 <p>If we wanted to know how many missing values there are on each row or column we could use the <code>DataFrame#sum()</code> method:</p>
 <div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.185760Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.067021Z&quot;}}" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1">df.isna().<span class="bu" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1">df.isna().<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">sum</span>(axis<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1393,7 +1403,7 @@ font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'rows'</span>)  <span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># 'rows' or 0</span></span></code></pre></div>
+font-style: inherit;"># 'rows' or 0</span></span></code></pre></div></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>0    1
 1    3
@@ -1409,7 +1419,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.288862Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.187682Z&quot;}}" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1">df.isna().<span class="bu" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1">df.isna().<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">sum</span>(axis<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1417,7 +1427,7 @@ font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'columns'</span>)  <span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># 'columns' or 1</span></span></code></pre></div>
+font-style: inherit;"># 'columns' or 1</span></span></code></pre></div></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>0    1
 1    3
@@ -1434,22 +1444,22 @@ dtype: int64</code></pre>
 </div>
 <p>To simply know the total number of missing values we can call <code>sum()</code> again:</p>
 <div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.400051Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.290994Z&quot;}}" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1">df.isna().<span class="bu" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1">df.isna().<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">sum</span>().<span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">sum</span>()</span></code></pre></div>
+font-style: inherit;">sum</span>()</span></code></pre></div></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>np.int64(25)</code></pre>
 </div>
 </div>
 <p>If we simply wanna know if there is any missing value with no care for the quantity we can simply use the <code>any()</code> method:</p>
 <div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.516972Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.402633Z&quot;}}" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1">df.isna().<span class="bu" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1">df.isna().<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">any</span>()  <span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># can also receive axis='rows' or 'columns'</span></span></code></pre></div>
+font-style: inherit;"># can also receive axis='rows' or 'columns'</span></span></code></pre></div></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>0    True
 1    True
@@ -1466,18 +1476,18 @@ dtype: bool</code></pre>
 </div>
 <p>Calling it again we have a single boolean output:</p>
 <div id="cell-22" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.634347Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.518727Z&quot;}}" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1">df.isna().<span class="bu" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1">df.isna().<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">any</span>().<span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">any</span>()</span></code></pre></div>
+font-style: inherit;">any</span>()</span></code></pre></div></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>np.True_</code></pre>
 </div>
 </div>
 <p>Besides the <code>isna()</code> method we also have the <code>notna()</code> method which is its boolean inverse. Applying it we can get the number of values that are not missing or simply if all values are not missing (but using the <code>all()</code> method instead of <code>any()</code>).</p>
 <div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.755759Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.636133Z&quot;}}" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><span class="bu" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(df.notna().<span class="bu" style="color: null;
 background-color: null;
@@ -1492,7 +1502,7 @@ font-style: inherit;">print</span>(df.notna().<span class="bu" style="color: nul
 background-color: null;
 font-style: inherit;">all</span>().<span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">all</span>())</span></code></pre></div>
+font-style: inherit;">all</span>())</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>75
 False</code></pre>
@@ -1500,7 +1510,7 @@ False</code></pre>
 </div>
 <p>Note 1: in the examples, it was used the DataFrame methods to check for missing values, but the pandas package has its own functions with the same purpose that can be applied to other objects. Example:</p>
 <div id="cell-26" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:55.875265Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.757785Z&quot;}}" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><span class="bu" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(pd.isna([<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -1513,7 +1523,7 @@ font-style: inherit;">print</span>(pd.notna([<span class="dv" style="color: #AD0
 background-color: null;
 font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">2</span>, np.nan]))</span></code></pre></div>
+font-style: inherit;">2</span>, np.nan]))</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[False False  True]
 [ True  True False]</code></pre>
@@ -1525,27 +1535,27 @@ font-style: inherit;">2</span>, np.nan]))</span></code></pre></div>
 <h3 class="anchored" data-anchor-id="time-comparison">Time comparison</h3>
 <p>Comparing the time taken by the two methods we can see that using <code>any()</code> is faster but <code>sum()</code> will give us the additional information about how many missing values there are.</p>
 <div id="cell-30" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:46:58.700850Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:55.876821Z&quot;}}" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%</span>timeit df.isna().<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">any</span>().<span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">any</span>()</span></code></pre></div>
+font-style: inherit;">any</span>()</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>439 μs ± 6.27 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)</code></pre>
+<pre><code>158 μs ± 19.5 μs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)</code></pre>
 </div>
 </div>
 <div id="cell-31" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:47:03.356772Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:46:58.702580Z&quot;}}" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%</span>timeit df.isna().<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">sum</span>().<span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">sum</span>()</span></code></pre></div>
+font-style: inherit;">sum</span>()</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>382 μs ± 26.4 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)</code></pre>
+<pre><code>107 μs ± 4.85 μs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)</code></pre>
 </div>
 </div>
 </section>
@@ -1554,12 +1564,12 @@ font-style: inherit;">sum</span>()</span></code></pre></div>
 <p>Two easy ways to deal with missing values are removing them or filling them with some value. These can be achieved with the <code>dropna()</code> and <code>fillna()</code> methods.</p>
 <p>The <code>dropna()</code> method will return a DataFrame without the rows and columns containing missing values.</p>
 <div id="cell-35" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:47:03.392158Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:47:03.359645Z&quot;}}" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1">df.dropna()</span></code></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1">df.dropna()</span></code></pre></div></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1577,7 +1587,7 @@ font-style: inherit;">sum</span>()</span></code></pre></div>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>-1.243214</td>
 <td>-0.898169</td>
 <td>0.028247</td>
@@ -1597,16 +1607,16 @@ font-style: inherit;">sum</span>()</span></code></pre></div>
 </div>
 <p>The <code>fillna()</code> method will return a DataFrame with the missing values filled with a specified value.</p>
 <div id="cell-37" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2018-07-10T09:47:03.504912Z&quot;,&quot;start_time&quot;:&quot;2018-07-10T09:47:03.395757Z&quot;}}" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1">df.fillna(value<span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1">df.fillna(value<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">5</span>)</span></code></pre></div>
+font-style: inherit;">5</span>)</span></code></pre></div></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1624,7 +1634,7 @@ font-style: inherit;">5</span>)</span></code></pre></div>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>-1.561323</td>
 <td>-0.169541</td>
 <td>-0.178454</td>
@@ -1637,7 +1647,7 @@ font-style: inherit;">5</span>)</span></code></pre></div>
 <td>1.412755</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>0.853305</td>
 <td>0.685175</td>
 <td>5.000000</td>
@@ -1650,7 +1660,7 @@ font-style: inherit;">5</span>)</span></code></pre></div>
 <td>0.781031</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>-0.816143</td>
 <td>0.159069</td>
 <td>0.499401</td>
@@ -1663,7 +1673,7 @@ font-style: inherit;">5</span>)</span></code></pre></div>
 <td>1.025504</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th data-quarto-table-cell-role="th">3</th>
 <td>-1.963400</td>
 <td>0.075933</td>
 <td>5.000000</td>
@@ -1676,7 +1686,7 @@ font-style: inherit;">5</span>)</span></code></pre></div>
 <td>-0.160657</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>-1.243214</td>
 <td>-0.898169</td>
 <td>0.028247</td>
@@ -1689,7 +1699,7 @@ font-style: inherit;">5</span>)</span></code></pre></div>
 <td>-0.839084</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
+<th data-quarto-table-cell-role="th">5</th>
 <td>1.009670</td>
 <td>0.842401</td>
 <td>5.000000</td>
@@ -1702,7 +1712,7 @@ font-style: inherit;">5</span>)</span></code></pre></div>
 <td>0.475758</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
+<th data-quarto-table-cell-role="th">6</th>
 <td>0.965163</td>
 <td>5.000000</td>
 <td>-0.821551</td>
@@ -1715,7 +1725,7 @@ font-style: inherit;">5</span>)</span></code></pre></div>
 <td>5.000000</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
+<th data-quarto-table-cell-role="th">7</th>
 <td>-0.864927</td>
 <td>0.824432</td>
 <td>-0.482469</td>
@@ -1728,7 +1738,7 @@ font-style: inherit;">5</span>)</span></code></pre></div>
 <td>5.000000</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
+<th data-quarto-table-cell-role="th">8</th>
 <td>-0.072640</td>
 <td>5.000000</td>
 <td>1.309103</td>
@@ -1741,7 +1751,7 @@ font-style: inherit;">5</span>)</span></code></pre></div>
 <td>5.000000</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
+<th data-quarto-table-cell-role="th">9</th>
 <td>5.000000</td>
 <td>5.000000</td>
 <td>5.000000</td>
@@ -1775,12 +1785,13 @@ font-style: inherit;">5</span>)</span></code></pre></div>
 
 </section>
 
- ]]></description>
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
   <category>python</category>
   <category>pandas</category>
   <category>numpy</category>
   <guid>https://hygorxaraujo.com/posts/2018-06-30-pandas-check-nan.html</guid>
   <pubDate>Sat, 30 Jun 2018 03:00:00 GMT</pubDate>
+  <media:content url="https://hygorxaraujo.com/assets/headers/2018-06-30-pandas-check-nan.svg" medium="image" type="image/svg+xml"/>
 </item>
 </channel>
 </rss>
