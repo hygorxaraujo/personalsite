@@ -18,3 +18,8 @@ To publish the site, run the following command:
 ```bash
 quarto publish gh-pages
 ```
+
+## SEO & Social Previews
+
+Detailed configuration for search engine optimization, Open Graph tags, Twitter Cards, and Jupyter Notebook metadata editing instructions can be found in [docs/seo.md](file:///home/hygor/code-projects/personalsite/docs/seo.md).
+
