@@ -31,6 +31,7 @@ dev = [
 
 [project.scripts]
 gen-header = "scripts.generate_gem_mesh_svg:main"
+gen-logo = "scripts.generate_logo:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/scripts"]
