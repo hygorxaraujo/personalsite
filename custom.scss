@@ -353,30 +353,39 @@ body:has(.about-custom) .quarto-title-banner { display: none; }
 }
 
 .about-metadata-table {
-  width: 100%;
-  max-width: 320px;
-  font-family: $font-family-monospace;
-  font-size: 0.74rem;
-  border-collapse: collapse;
-  margin-bottom: 2.2rem;
-  border-top: 1px solid $rule;
-  border-bottom: 1px solid $rule;
-  
-  tr {
-    border-bottom: 1px dashed $rule;
-    &:last-child { border-bottom: none; }
-  }
-  
-  td {
-    padding: 0.65rem 0;
-    &:first-child {
-      color: $emerald;
-      font-weight: 500;
-      text-align: left;
+  &.table {
+    width: 100%;
+    max-width: 320px;
+    font-family: $font-family-monospace;
+    font-size: 0.74rem;
+    border-collapse: collapse;
+    margin-bottom: 2.2rem;
+    border-top: 1px solid $rule !important;
+    border-bottom: 1px solid $rule !important;
+    background-color: transparent !important;
+    
+    thead, tbody, tfoot, tr, td, th {
+      border: none !important;
+      background-color: transparent !important;
+      box-shadow: none !important;
     }
-    &:last-child {
-      color: $ink-soft;
-      text-align: right;
+    
+    tr {
+      border-bottom: 1px dashed $rule !important;
+      &:last-child { border-bottom: none !important; }
+    }
+    
+    td {
+      padding: 0.65rem 0 !important;
+      &:first-child {
+        color: $emerald !important;
+        font-weight: 500 !important;
+        text-align: left !important;
+      }
+      &:last-child {
+        color: $ink-soft !important;
+        text-align: right !important;
+      }
     }
   }
 }
