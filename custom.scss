@@ -328,7 +328,7 @@ body:has(.about-custom) .quarto-title-banner { display: none; }
   }
 }
 
-.about-portrait-wrap {
+.about-portrait-card, .about-portrait-wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -385,7 +385,7 @@ body:has(.about-custom) .quarto-title-banner { display: none; }
   max-width: 68ch;
 }
 
-.about-hero-title {
+.about-hero, .about-hero-title {
   font-family: 'Newsreader', serif;
   font-size: clamp(1.85rem, 4vw, 2.7rem);
   line-height: 1.1;
@@ -419,7 +419,7 @@ body:has(.about-custom) .quarto-title-banner { display: none; }
 }
 
 // Synthesis SVG Visual Graph (fig. 2)
-.about-synthesis-graph {
+.about-graphic, .about-synthesis-graph {
   width: 100%;
   max-width: 320px;
   margin: 1.5rem auto 0;
