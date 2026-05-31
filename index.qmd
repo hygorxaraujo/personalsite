@@ -1,7 +1,7 @@
 ---
 title: "Hygor X. Araújo"
-pagetitle: "Hygor X. Araújo — Intelligent Systems Engineer"
-description-meta: "Writing on data science, ML engineering, and agentic workflows by Hygor X. Araújo, an intelligent-systems engineer."
+pagetitle: "Hygor X. Araújo — Data Science & ML Engineering"
+description-meta: "Writing on data science, ML engineering, and agentic workflows by Hygor X. Araújo."
 page-layout: full
 title-block-banner: false
 toc: false
@@ -20,13 +20,13 @@ listing:
 ```{=html}
 <section class="mono-hero">
   <div>
-    <div class="eyebrow">Hi, I'm Hygor — Intelligent Systems Engineer</div>
-    <h1>I build machines that <em>learn &amp; reason</em>, and write about how.</h1>
-    <p class="lede">I'm a data scientist and intelligent-systems engineer with a researcher's bias for first principles. Here I write about <b>data science, ML engineering, and agentic workflows</b> — white-box over black-box, the math and data flow always made explicit.</p>
+    <div class="eyebrow">Hi, I'm Hygor — Data Science & ML Engineering</div>
+    <h1>Data, <em>Models</em>, Agents and <em>Intelligent Systems</em>, bringing them to the real world.</h1>
+    <p class="lede">I'm a data scientist and intelligent-systems engineer. Here I write about <b>data science, ML engineering, and agentic workflows</b>.</p>
     <div class="meta">
-      <div><b>7+ yrs</b>data &amp; software systems</div>
+      <div><b>8+ yrs</b>data &amp; software systems</div>
       <div><b>MSc</b>Computational Intelligence</div>
-      <div><b>MBA</b>AI &amp; Big Data · USP</div>
+      <!-- <div><b>MBA</b>AI &amp; Big Data · USP</div> -->
     </div>
     <div class="social">
       <a href="https://linkedin.com/in/hygorxaraujo">↗ LinkedIn</a>
